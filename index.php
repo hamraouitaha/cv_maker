@@ -14,12 +14,14 @@ $test = file_get_contents("infor.json");
 	$json= json_encode($json);
 	file_put_contents('infor.json',$json);
 	}
-		 ?> 
+		 ?>
 <head>
 		<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<title><?php  echo $json[0]["T1"];  ?></title>
 	<link rel="profile" href="http://gmpg.org/xfn/11" />
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<link rel="stylesheet" href="http://127.0.0.1/cv_maker/\css\c1.css">
 	<link rel="pingback" href="http://saklyayoub.tn/xmlrpc.php" />
 	<link href='http://fonts.googleapis.com/css?family=Lato:400,400italic,700,700italic&subset=latin,cyrillic-ext,latin-ext,cyrillic' rel='stylesheet' type='text/css'>
     	<!--[if lt IE 9]>
@@ -268,7 +270,10 @@ img.emoji {
                 </div>
                 <div class="section_body resume_section_body">
                     <div class="sidebar resume_sidebar">
-                                                <aside id="skills-widget-5" class="widget widget_skills"><h3 class="widget_title">CONCEPTION</h3>			
+                                                <aside id="skills-widget-5" class="widget widget_skills"><h3 class="widget_title">CONCEPTION
+												<button class="w3-button w3-xlarge w3-black">+</button>
+											    <button class="w3-button w3-xlarge w3-teal">-</button>
+												</h3>
 		<div class="widget_inner style_1">
 			<div class="skills_row odd first"><span class="caption">UML</span><span class="progressbar"><span class="progress" style="background-color:#39D5FF;" rel="20%"><span class="value">90%</span></span></span></div><div class="skills_row even"><span class="caption">Merise </span><span class="progressbar"><span class="progress" style="background-color:#1297E0;" rel="98%"><span class="value">98%</span></span></span></div>		</div>
 </aside><aside id="skills-widget-2" class="widget widget_skills"><h3 class="widget_title">Programmation</h3>			

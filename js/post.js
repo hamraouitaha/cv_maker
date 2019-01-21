@@ -20,6 +20,7 @@
 		   window.location.reload(".td");
 		}) ;
 			 }
+			 //image ......
 			c=jQuery(this).text();
 			jQuery(this).replaceWith('<input type="text" class="tst" />');
 			jQuery(".tst").val(c);
