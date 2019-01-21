@@ -222,8 +222,8 @@ img.emoji {
                                             ?></span>								
 							     </div>
 								 <div class="profile_row" >
-								<span class="th"> Adresse: </span><span class="td" id="T6" ><?php 								
-                                             echo $json[0]['T6'];
+								<span class="th"> Adresse: </span><span class="td" id="T7" ><?php 								
+                                             echo $json[0]['T7'];
                                             ?></span>								
 							     </div>
 							
@@ -252,7 +252,7 @@ img.emoji {
 				</div>
 				<div class="section_body profile_section_body">
 					<div class="proile_body">
-						<p class="td" id="T6">Mind Engineering est une agence spécialisée dans la conception de solutions logicielles innovantes, performantes et sur mesure. Nous sommes une équipe de développeurs, designers et chefs de projet, tous experts, passionnés par notre métier et fiers des solutions que nous offrons à nos partenaires.</p>
+						<p class="td" id="T6"> <?php  echo $json[0]["T6"];  ?></p>
 					</div>			
 				</div>
 			</section>	
