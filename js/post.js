@@ -3,11 +3,11 @@
 			 idc=jQuery(this).attr("id");
 			 if(idc == "T6"){
 				 c=jQuery(this).text();
-			jQuery(this).replaceWith('<textarea cols="110" rows="4" type="text" class="tst" /> </textarea>');
+			jQuery(this).replaceWith('<textarea cols="110" rows="4" type="text" class="tst"></textarea>');
 			jQuery(".tst").val(c);
 		jQuery(".tst").blur(function(t) {
 		k=jQuery(this).val();		
-		jQuery(this).replaceWith('<span class="td" >' + k + '</span>');		
+		jQuery(this).replaceWith('<p class="td" >'+ k +'</p>');		
 		jQuery.post(
             "index.php", 
             {
@@ -19,7 +19,7 @@
            });
 		   window.location.reload(".td");
 		}) ;
-			 }
+			 }else{
 			 //image ......
 			c=jQuery(this).text();
 			jQuery(this).replaceWith('<input type="text" class="tst" />');
@@ -38,5 +38,6 @@
            });
 		   window.location.reload(".td");
 		}) ;
+		 }
 		 });	
 		});			

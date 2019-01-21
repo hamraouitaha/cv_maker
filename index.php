@@ -254,7 +254,7 @@ img.emoji {
 				</div>
 				<div class="section_body profile_section_body">
 					<div class="proile_body">
-						<p class="td" id="T6"> <?php  echo $json[0]["T6"];  ?></p>
+						<p class="td" id="T6"> <?php  echo $json[0]["T6"];  ?> </p>
 					</div>			
 				</div>
 			</section>	
