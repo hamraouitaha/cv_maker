@@ -1,4 +1,4 @@
-  jQuery(document).ready(function(){
+jQuery(document).ready(function(){
          jQuery(".td").click(function(t) {
 			 idc=jQuery(this).attr("id");
 			 if(idc == "T6"){
@@ -10,7 +10,7 @@
 		jQuery(this).replaceWith('<p class="td" >'+ k +'</p>');		
 		jQuery.post(
             "index.php", 
-            {
+            {  
                 username : jQuery(this).val(),
 				id : idc,
             },
@@ -41,3 +41,4 @@
 		 }
 		 });	
 		});			
+	

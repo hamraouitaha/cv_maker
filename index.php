@@ -173,7 +173,7 @@ img.emoji {
 			It looks like you're using an old version of Internet Explorer. For the best WordPress experience, please <a href="http://microsoft.com">update your browser</a> or learn how to <a href="http://browsehappy.com">browse happy</a>!
 		</div>
 			<![endif]-->
-			<form method="POST" action="nwinp.php" enctype="multipart/form-data">
+			<form method="POST" action="index.php" enctype="multipart/form-data">
 	<table class="colored">
 		<tr>
 			<td class="cl1"></td>
@@ -187,7 +187,7 @@ img.emoji {
                 <header id="header" class="site_header" role="banner">
 							<div class="social_links">
 					<ul>
-												<li class="fb"><a target="_blank" href="https://www.facebook.com/mariam.maryouma.5249">Facebook</a></li>																		<li class="lnkd"><a target="_blank" href="https://www.linkedin.com/in/sakly-ayoub-ba269391">Linkedin</a></li>																		<li class="skp"><a target="_blank" href="skype:saklyayoub@live.com" class="skp">Skype</a></li>																											
+												<li class="fb"><a target="_blank" href="https://www.facebook.com/ziedtuihri">Facebook</a></li>																		<li class="lnkd"><a target="_blank" href="https://www.linkedin.com/in/sakly-ayoub-ba269391">Linkedin</a></li>																		<li class="skp"><a target="_blank" href="skype:saklyayoub@live.com" class="skp">Skype</a></li>																											
 					</ul>
 				</div>
 			        </header>
@@ -201,7 +201,9 @@ img.emoji {
 					<div id="profile_header">
 					<script src="http://127.0.0.1/cv_maker/\js\post.js"> </script>					
                         <div id="profile_user">
-               <div id="profile_photo"><img src="http://127.0.0.1/cv/img/index.png" alt="zied tuihri" /></div>
+               <div id="profile_photo">
+			   
+			   <img src="<?php echo $json[0]['T8'] ;?>" alt="zied tuihri" /></div>
               <div id="profile_name_area">
                                 <div id="profile_name">
                                                 <h1 id="profile_title"><span class="firstname"><?php 
@@ -227,26 +229,21 @@ img.emoji {
 								<span class="th"> Adresse: </span><span class="td" id="T7" ><?php 								
                                              echo $json[0]['T7'];
                                             ?></span>								
-							     </div>
-							
-                                                        							
+							     </div>						
                                                         							<div class="profile_row">
 								<span class="th">Téléphone:</span><span class="td" id="T3"><?php 
 										echo $json[0]["T3"];
                                             ?></span>
-								
 							</div>
                                                         							<div class="profile_row">
 								<span class="th">Email:</span><span class="td" id="T4"><?php 
 												echo $json[0]["T4"];
                                             ?></span>
-							
 							</div>
                                                         							<div class="profile_row">
 								<span class="th">Site Internet:</span><span class="td" id="T5"><a href="http://mind.engineering"><?php 
 												echo $json[0]["T5"];
                                             ?></a></span>
-								
 							</div>
                             						</div>
 						
@@ -270,12 +267,13 @@ img.emoji {
                 </div>
                 <div class="section_body resume_section_body">
                     <div class="sidebar resume_sidebar">
+					<script>	function fn(){	alert("les button marche bien"); }</script>
                                                 <aside id="skills-widget-5" class="widget widget_skills"><h3 class="widget_title">CONCEPTION
-												<button class="w3-button w3-xlarge w3-black">+</button>
+												<button class="w3-button w3-xlarge w3-black" onclick="fn()">+</button>
 											    <button class="w3-button w3-xlarge w3-teal">-</button>
 												</h3>
 		<div class="widget_inner style_1">
-			<div class="skills_row odd first"><span class="caption">UML</span><span class="progressbar"><span class="progress" style="background-color:#39D5FF;" rel="20%"><span class="value">90%</span></span></span></div><div class="skills_row even"><span class="caption">Merise </span><span class="progressbar"><span class="progress" style="background-color:#1297E0;" rel="98%"><span class="value">98%</span></span></span></div>		</div>
+			<div class="skills_row odd first"><span class="caption">UML</span><span class="progressbar"><span class="progress" style="background-color:#39D5FF;" rel="90%"><span class="value">90%</span></span></span></div><div class="skills_row even"><span class="caption">Merise </span><span class="progressbar"><span class="progress" style="background-color:#1297E0;" rel="98%"><span class="value">98%</span></span></span></div>		</div>
 </aside><aside id="skills-widget-2" class="widget widget_skills"><h3 class="widget_title">Programmation</h3>			
 		<div class="widget_inner style_1">
 			<div class="skills_row odd first"><span class="caption">PHP</span><span class="progressbar"><span class="progress" style="background-color:#1297E0;" rel="95%"><span class="value">95%</span></span></span></div><div class="skills_row even"><span class="caption">MySQL</span><span class="progressbar"><span class="progress" style="background-color:#1297E0;" rel="95%"><span class="value">95%</span></span></span></div><div class="skills_row odd"><span class="caption">CSS</span><span class="progressbar"><span class="progress" style="background-color:#0057A0;" rel="97%"><span class="value">97%</span></span></span></div><div class="skills_row even"><span class="caption">HTML</span><span class="progressbar"><span class="progress" style="background-color:#39D5FF;" rel="90%"><span class="value">90%</span></span></span></div><div class="skills_row odd"><span class="caption">Javascript</span><span class="progressbar"><span class="progress" style="background-color:#009C41;" rel="70%"><span class="value">70%</span></span></span></div><div class="skills_row even"><span class="caption">Shell</span><span class="progressbar"><span class="progress" style="background-color:#009C41;" rel="70%"><span class="value">70%</span></span></span></div><div class="skills_row odd"><span class="caption">Git</span><span class="progressbar"><span class="progress" style="background-color:#0057A0;" rel="97%"><span class="value">97%</span></span></span></div><div class="skills_row even"><span class="caption">XML</span><span class="progressbar"><span class="progress" style="background-color:#5EFAF7;" rel="80%"><span class="value">80%</span></span></span></div>		</div>
