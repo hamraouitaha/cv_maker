@@ -1,7 +1,9 @@
   jQuery(document).ready(function(){
          jQuery(".td").click(function(t) {
 			 idc=jQuery(this).attr("id");
-			 ch='<input type="text" class="tst" />';
+			 type=jQuery(this).attr("data-type");
+			 alert(type);
+			 ch='<input type="'+type+'" class="tst" />';
 			 if(idc == "T6")
 			ch='<textarea cols="110" rows="4" type="text" class="tst"></textarea>';
 			 //image ......
@@ -24,4 +26,3 @@
 		}) ;
 		 });	
 		});			
-		

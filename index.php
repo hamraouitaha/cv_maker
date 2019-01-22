@@ -195,15 +195,13 @@ img.emoji {
 	    <div id="main" >
 	<div id="primary" class="content_area">
 		<div id="content" class="site_content" role="main">
-
 			<section id="profile" class="section profile_section first odd">
 				<div class="section_header profile_section_header opened">
 										<h2 class="section_title profile_section_title vis"><a href="#"><span class="icon icon-user"></span><span class="section_name ">Profil</span></a><span class="section_icon"></span></h2>
 					<div id="profile_header">
 					<script src="http://127.0.0.1/cv_maker/\js\post.js"> </script>					
                         <div id="profile_user">
-               <div id="profile_photo">
-			   
+               <div id="profile_photo">			   
 			   <img src="<?php echo $json[0]['T8'] ;?>" alt="zied tuihri" /></div>
               <div id="profile_name_area">
                                 <div id="profile_name">
@@ -217,12 +215,12 @@ img.emoji {
 						<div id="profile_data">                                        
 							<div class="profile_row" >													                       
 							                <div class="profile_row" >
-                                            <span class="th">Nom:</span><span class="td" id="T1" ><?php 								
+                                            <span class="th">Nom:</span><span class="td" id="T1" data-type="text"><?php 								
                                             echo $json[0]["T1"];
                                             ?></span>                                           
  						</div>						  
                                  <div class="profile_row" >
-								<span class="th">  Date de naissance: </span><span class="td" id="T2" ><?php 								
+								<span class="th">  Date de naissance: </span><span class="td" id="T2" data-type="date"><?php 								
                                             echo $json[0]['T2'];
                                             ?></span>								
 							     </div>
@@ -232,12 +230,12 @@ img.emoji {
                                             ?></span>								
 							     </div>						
                                                         							<div class="profile_row">
-								<span class="th">Téléphone:</span><span class="td" id="T3"><?php 
+								<span class="th">Téléphone:</span><span class="td" id="T3" data-type=""><?php 
 										echo $json[0]["T3"];
                                             ?></span>
 							</div>
                                                         							<div class="profile_row">
-								<span class="th">Email:</span><span class="td" id="T4"><?php 
+								<span class="th">Email:</span><span class="td" id="T4" data-type="email"><?php 
 												echo $json[0]["T4"];
                                             ?></span>
 							</div>
