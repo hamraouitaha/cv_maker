@@ -6,6 +6,7 @@ $test = file_get_contents("infor.json");
  ?>
  <?php
   if( isset($_POST['username']) &&  isset($_POST['id'])){ 
+	
 	$test = file_get_contents("infor.json");
     $json = json_decode($test,true);
 	$ch=$_POST['username'];
