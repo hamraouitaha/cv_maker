@@ -230,7 +230,7 @@ img.emoji {
                                             ?></span>								
 							     </div>						
                                                         							<div class="profile_row">
-								<span class="th">Téléphone:</span><span class="td" id="T3" data-type=""><?php 
+								<span class="th">Téléphone:</span><span class="td" id="T3" data-type="tel"><?php 
 										echo $json[0]["T3"];
                                             ?></span>
 							</div>
@@ -240,7 +240,7 @@ img.emoji {
                                             ?></span>
 							</div>
                                                         							<div class="profile_row">
-								<span class="th">Site Internet:</span><span class="td" id="T5"><a href="http://mind.engineering"><?php 
+								<span class="th">Site Internet:</span><span class="td" id="T5" data-type="url"><a href="http://mind.engineering"><?php 
 												echo $json[0]["T5"];
                                             ?></a></span>
 							</div>
@@ -267,12 +267,14 @@ img.emoji {
                 <div class="section_body resume_section_body">
                     <div class="sidebar resume_sidebar">
 					<script>	function fn(){	alert("les button marche bien"); }</script>
-                                                <aside id="skills-widget-5" class="widget widget_skills"><h3 class="widget_title">CONCEPTION
+                                                <aside id="skills-widget-5" class="widget widget_skills"><h3 class="widget_title">
+												<span class="td" id="T10">
+												<?php echo $json[0]["T10"]; ?> </span>
 												<button class="w3-button w3-xlarge w3-black" onclick="fn()">+</button>
 											    <button class="w3-button w3-xlarge w3-teal">-</button>
 												</h3>
 		<div class="widget_inner style_1">
-			<div class="skills_row odd first"><span class="caption">UML</span><span class="progressbar"><span class="progress" style="background-color:#39D5FF;" rel="90%"><span class="value">90%</span></span></span></div><div class="skills_row even"><span class="caption">Merise </span><span class="progressbar"><span class="progress" style="background-color:#1297E0;" rel="98%"><span class="value">98%</span></span></span></div>		</div>
+			<div class="skills_row odd first"><span class="td" id="T9"><?php echo $json[0]["T9"] ?></span><span class="progressbar"><span class="progress" style="background-color:#39D5FF;" rel="90%"><span class="value">90%</span></span></span></div><div class="skills_row even"><span class="caption">Merise </span><span class="progressbar"><span class="progress" style="background-color:#1297E0;" rel="98%"><span class="value">98%</span></span></span></div>		</div>
 </aside><aside id="skills-widget-2" class="widget widget_skills"><h3 class="widget_title">Programmation</h3>			
 		<div class="widget_inner style_1">
 			<div class="skills_row odd first"><span class="caption">PHP</span><span class="progressbar"><span class="progress" style="background-color:#1297E0;" rel="95%"><span class="value">95%</span></span></span></div><div class="skills_row even"><span class="caption">MySQL</span><span class="progressbar"><span class="progress" style="background-color:#1297E0;" rel="95%"><span class="value">95%</span></span></span></div><div class="skills_row odd"><span class="caption">CSS</span><span class="progressbar"><span class="progress" style="background-color:#0057A0;" rel="97%"><span class="value">97%</span></span></span></div><div class="skills_row even"><span class="caption">HTML</span><span class="progressbar"><span class="progress" style="background-color:#39D5FF;" rel="90%"><span class="value">90%</span></span></span></div><div class="skills_row odd"><span class="caption">Javascript</span><span class="progressbar"><span class="progress" style="background-color:#009C41;" rel="70%"><span class="value">70%</span></span></span></div><div class="skills_row even"><span class="caption">Shell</span><span class="progressbar"><span class="progress" style="background-color:#009C41;" rel="70%"><span class="value">70%</span></span></span></div><div class="skills_row odd"><span class="caption">Git</span><span class="progressbar"><span class="progress" style="background-color:#0057A0;" rel="97%"><span class="value">97%</span></span></span></div><div class="skills_row even"><span class="caption">XML</span><span class="progressbar"><span class="progress" style="background-color:#5EFAF7;" rel="80%"><span class="value">80%</span></span></span></div>		</div>
