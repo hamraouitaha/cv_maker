@@ -271,28 +271,35 @@ img.emoji {
 						jQuery('#b1').click(function(){
 							jQuery('#skills-widget-5').after('<aside id="skills-widget-6" class="widget widget_skills"><h3 class="widget_title">SYSTÈME DE GESTION DE CONTENUE</h3>	<div class="widget_inner style_1"><div class="skills_row odd first"><span class="caption">WordPress</span><span class="progressbar"><span class="progress" style="background-color:#1297E0; width : 98% ;" rel="98%"><span class="value">98%</span></span></span></div><div class="skills_row even"><span class="caption">Prestashop</span><span class="progressbar"><span class="progress" style="background-color:#5EFAF7 ;width : 80% ;" rel="80%"><span class="value">80%</span></span></span></div><div class="skills_row odd"><span class="caption">Drupal</span><span class="progressbar"><span class="progress" style="background-color:#F1C40F ; width : 60% ;" rel="60%"><span class="value">60%</span></span></span></div><div class="skills_row even"><span class="caption">Magento</span><span class="progressbar"><span class="progress" style="background-color:#5EFAF7 ; width : 80% ;" rel="80%"><span class="value">80%</span></span></span></div></div></aside>' );           
 							});
-						
 						jQuery('#b2').click(function(){
-                    jQuery('aside').remove('#skills-widget-6'); 
+                    jQuery('#skills-widget-6').remove('#skills-widget-6'); 
                 });
+				jQuery('#b11').click(function(){
+					jQuery('#').after();
+				});
+				jQuery('#b22').click(function(){
+					jQuery('#').after();
+				});
             });
-					
-					</script>
+			</script>
                                                 <aside id="skills-widget-5" class="widget widget_skills"><h3 class="widget_title">
-												<span class="td" id="T12" data-type="text">
-												<?php echo $json[0]["T12"]; ?></span>
+												<span class="td" id="Tk" data-type="text">
+												<?php echo $json[0]["Tk"]; ?></span>
 												<input type="button" value="+" class="w3-button w3-xlarge w3-black" id="b1" >
 											    <input type="button"  value="-" class="w3-button w3-xlarge w3-teal" id="b2">
 												</h3>
 		<div class="widget_inner style_1">
 			<div class="skills_row odd first"><span class="td" id="T9" data-type="text"><?php echo $json[0]["T9"] ?></span>
-			<input type="button" value="+" class="w3-button w3-xlarge w3-black" onclick="alert('le button marche ')" >
-			<input type="button"  value="-" class="w3-button w3-xlarge w3-teal">
+			<input type="button" value="+" class="w3-button w3-xlarge w3-black" id="b11" >
+			<input type="button"  value="-" class="w3-button w3-xlarge w3-teal" id="b22" >
 			<span class="progressbar"><span class="progress" style="background-color:#39D5FF;" rel="90%"><span class="value">90%</span></span></span></div><div class="skills_row even"><span class="caption">Merise </span><span class="progressbar"><span class="progress" style="background-color:#1297E0;" rel="98%"><span class="value">98%</span></span></span></div>		</div>
 </aside><aside id="skills-widget-4" class="widget widget_skills"><h3 class="widget_title">COMMERCIAL &#038; MANAGEMENT</h3>			
 		<div class="widget_inner style_2">
 			<div class="skills_row odd first"><span class="legend" style="background-color:#0057A0;"></span><span class="caption">CIEL SAGE</span></div><div class="skills_row even"><span class="legend" style="background-color:#39D5FF;"></span><span class="caption">ZOHO</span></div><div class="skills_row odd"><span class="legend" style="background-color:#5EFAF7;"></span><span class="caption">ODOO</span></div><div class="skills_row even"><span class="legend" style="background-color:#39D5FF;"></span><span class="caption">MANTIS</span></div><div class="skills_row odd"><span class="legend" style="background-color:#009C41;"></span><span class="caption">AGILE SCRUM</span></div><div class="svg"><svg class="piechart" xmlns="http://www.w3.org/2000/svg"><path d="M66,66  L130,66  A64,64 0 0,1 73,130 z" fill="#0057A0"></path><path d="M66,66  L73,130  A64,64 0 0,1 6,89 z" fill="#39D5FF"></path><path d="M66,66  L6,89  A64,64 0 0,1 22,20 z" fill="#5EFAF7"></path><path d="M66,66  L22,20  A64,64 0 0,1 99,11 z" fill="#39D5FF"></path><path d="M66,66  L99,11  A64,64 0 0,1 130,66 z" fill="#009C41"></path><circle cx="66" cy="66" r="40" fill="#ffffff"></circle></svg></div>		</div>
-</aside><aside id="skills-widget-3" class="widget widget_skills"><h3 class="widget_title">LANGUES</h3>			
+</aside><aside id="skills-widget-3" class="widget widget_skills"><h2 class="widget_title">LANGUES
+<input type="button" value="+" class="w3-button w3-xlarge w3-black" onclick="alert('le button marche ')" >
+			<input type="button"  value="-" class="w3-button w3-xlarge w3-teal">		
+</h2>	
 		<div class="widget_inner style_3">
 			<div class="skills_row odd first"><span class="caption">Arabe</span><span class="progressbar"><span class="progress" style="background-color:#1297E0;" rel="100%"></span></span></div><div class="skills_row even"><span class="caption">Français</span><span class="progressbar"><span class="progress" style="background-color:#F5AB35;" rel="60%"></span></span></div><div class="skills_row odd"><span class="caption">Anglais</span><span class="progressbar"><span class="progress" style="background-color:#2ECC71;" rel="80%"></span></span></div>		</div>
 </aside>                    </div>
