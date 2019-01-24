@@ -10,7 +10,7 @@
 			jQuery(this).replaceWith(ch);
 			jQuery(".tst").val(c);
 		jQuery(".tst").blur(function(t) {
-		k=jQuery(this).val();				
+		k=jQuery(this).val();
 		if(k !=""){
 		jQuery(this).replaceWith('<span class="td" >' + k + '</span>');		
 		jQuery.post(
@@ -26,4 +26,4 @@
 }
 		}) ;
 		 });
-		});		
+		});	
