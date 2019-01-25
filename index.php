@@ -275,19 +275,30 @@ img.emoji {
                 <div class="section_body resume_section_body">
                     <div class="sidebar resume_sidebar">
 					<script>
+					n=1;
 					jQuery(document).ready(function(){
 						jQuery('#b1').click(function(){
-							ch='<aside id="skills-widget-5" class="widget widget_skills"><h3 class="widget_title"><span class="td" id="Tk" data-type="text"><?php echo $json[0]["Tk"]; ?></span><input type="button" value="+" class="w3-button w3-xlarge w3-black" id="b1" ><input type="button"  value="-" class="w3-button w3-xlarge w3-teal" id="b2"></h3><div class="widget_inner style_1"><div class="skills_row odd first"><span class="td" id="T9" data-type="text"><?php echo $json[0]["T9"] ?></span><input type="button" value="+" class="w3-button w3-xlarge w3-black" id="b11" ><input type="button"  value="-" class="w3-button w3-xlarge w3-teal" id="b22" ><span class="progressbar"><span class="progress" style="background-color:#39D5FF;" rel="90%"><span class="value">90%</span></span></span></div></div></aside>';
+							ch2="cv"+n;
+							ch='<aside id="'+ch2+'" class="widget widget_skills"><h3 class="widget_title"><span class="td" id="Tk" data-type="text"><?php echo $json[0]["Tk"]; ?></span></h3><div class="widget_inner style_1"><div class="skills_row odd first"><span class="td" id="T9" data-type="text"><?php echo $json[0]["T9"] ?></span><input type="button" value="+" class="w3-button w3-xlarge w3-black" id="b11" ><input type="button"  value="-" class="w3-button w3-xlarge w3-teal" id="b22" ><span class="progressbar"><span class="progress" style="background-color:#39D5FF; width:90%" rel="90%"><span class="value">90%</span></span></span></div></div></aside>';
+											jQuery.getJSON("infor.json")
+											
+											jQuery('#skills-widget-5').after(ch);
 											jQuery.post(
-								"index.php", 
-								{
+								"index.php",
+								{  
 									x : ch,
-									y : "cv",
+									y : ch2,
 								}
 							   );
-							  window.location.reload(".td");  
+							  n++;
 							});  
 						jQuery('#b2').click(function(){
+							jQuery.post(
+								"index.php",
+								{
+									n : "1",
+								}
+							   );
 						window.location.reload(".td");
                 });
 				jQuery('#b11').click(function(){
@@ -310,7 +321,7 @@ img.emoji {
 			<input type="button"  value="-" class="w3-button w3-xlarge w3-teal" id="b22" >
 			<span class="progressbar"><span class="progress" style="background-color:#39D5FF;" rel="90%"><span class="value">90%</span></span></span></div>
 			</div>
-</aside><div >
+</aside><div id="">
 <?php 
 foreach($json[1] as $i)
 echo $i."<br>";
