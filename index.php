@@ -11,16 +11,47 @@ $test = file_get_contents("infor.json");
 	$ch=$_POST['username'];
 	$id=$_POST['id'];
     $json[0][$id]=$ch;
-	$json= json_encode($json);
+			$json= json_encode($json);
 	file_put_contents('infor.json',$json);
 	}
-	if( isset($_POST['x']) &&  isset($_POST['y'])){ 
+	if( isset($_POST['x']) ){ 
 		$test = file_get_contents("infor.json");
     $json = json_decode($test,true);
-	$ch=$_POST['x'];
-	$id=$_POST['y'];
-	$json[1][$id]=$ch;
-	$json= json_encode($json);
+	$n=1; 
+	$x=$_POST['x'].$n;
+	$y="K".$n;
+	$w="C".$n;
+	foreach ($json[0] as $i=>$j){
+	if($i == $y){
+			$n++;
+			$y="K".$n;
+		}
+			if($i == $w){
+			$n++;
+			$w="C".$n;
+		}
+	}
+	foreach ($json[1] as $i=>$j){
+		if($i == $x) {
+			$n++;
+			$x=$_POST['x'].$n;
+		}
+	}
+		$json[0][$y]="click her";
+		$json[0][$w]="click her";
+	$ch=' <aside id="'.$x.'" class="widget widget_skills"><h3 class="widget_title">
+												<span class="td" id="'.$y.'" data-type="text"> '.$json[0][$y] .' </span>
+											    <input type="button"  value="-" class="w3-button w3-xlarge w3-teal" id="b2">
+												</h3>
+		<div class="widget_inner style_1">
+			<div class="skills_row odd first"><span class="td" id="'.$w.'" data-type="text">'.$json[0][$w] .'</span>
+			<input type="button" value="+" class="w3-button w3-xlarge w3-black" id="b11" >
+			<input type="button"  value="-" class="w3-button w3-xlarge w3-teal" id="b22" >
+			<span class="progressbar"><span class="progress" style="background-color:#39D5FF;" rel="90%"><span class="value">90%</span></span></span></div>
+			</div>
+</aside>';  
+	$json[1][$x]=$ch;  
+			$json= json_encode($json);
 	file_put_contents('infor.json',$json);
 			}
 		 ?>
@@ -216,7 +247,7 @@ img.emoji {
                                                 <h1 id="profile_title"><span class="firstname"><?php 
                                                                              echo $json[0]['T1'] ;?>
                                                                             </span> <span class="lastname"></span></span></h1><h4 id="profile_position">
-																			<span id="T7" class="td" data-type="text" ><?php echo $json[0]['T7']; ?> </span></h4>
+																			<span id="T10" class="td" data-type="text" ><?php echo $json[0]['T10']; ?> </span></h4>
                                             </div>  
                             </div>
                         </div>                 
@@ -275,22 +306,16 @@ img.emoji {
                 <div class="section_body resume_section_body">
                     <div class="sidebar resume_sidebar">
 					<script>
-					n=1;
 					jQuery(document).ready(function(){
 						jQuery('#b1').click(function(){
-							ch2="cv"+n;
-							ch='<aside id="'+ch2+'" class="widget widget_skills"><h3 class="widget_title"><span class="td" id="Tk" data-type="text"><?php echo $json[0]["Tk"]; ?></span></h3><div class="widget_inner style_1"><div class="skills_row odd first"><span class="td" id="T9" data-type="text"><?php echo $json[0]["T9"] ?></span><input type="button" value="+" class="w3-button w3-xlarge w3-black" id="b11" ><input type="button"  value="-" class="w3-button w3-xlarge w3-teal" id="b22" ><span class="progressbar"><span class="progress" style="background-color:#39D5FF; width:90%" rel="90%"><span class="value">90%</span></span></span></div></div></aside>';
-											jQuery.getJSON("infor.json")
-											
-											jQuery('#skills-widget-5').after(ch);
+							d= jQuery("span").closest("aside").attr("id");
+							alert(d);
 											jQuery.post(
 								"index.php",
 								{  
-									x : ch,
-									y : ch2,
+									x : d
 								}
-							   );
-							  n++;
+							   );  location.reload();
 							});  
 						jQuery('#b2').click(function(){
 							jQuery.post(
@@ -299,7 +324,6 @@ img.emoji {
 									n : "1",
 								}
 							   );
-						window.location.reload(".td");
                 });
 				jQuery('#b11').click(function(){
 					jQuery('#').after();
@@ -309,7 +333,7 @@ img.emoji {
 				});
             });
 			</script>
-                                                <aside id="skills-widget-5" class="widget widget_skills"><h3 class="widget_title">
+                                                <aside id="cv" class="widget widget_skills"><h3 class="widget_title">
 												<span class="td" id="Tk" data-type="text">
 												<?php echo $json[0]["Tk"]; ?></span>
 												<input type="button" value="+" class="w3-button w3-xlarge w3-black" id="b1" >
@@ -321,15 +345,15 @@ img.emoji {
 			<input type="button"  value="-" class="w3-button w3-xlarge w3-teal" id="b22" >
 			<span class="progressbar"><span class="progress" style="background-color:#39D5FF;" rel="90%"><span class="value">90%</span></span></span></div>
 			</div>
-</aside><div id="">
+</aside><br><div id="a1">
 <?php 
-foreach($json[1] as $i)
+foreach($json[1]  as $i)
 echo $i."<br>";
 ?>
-</div><aside id="skills-widget-4" class="widget widget_skills"><h3 class="widget_title">COMMERCIAL &#038; MANAGEMENT</h3>			
+</div><aside id="cv2" class="widget widget_skills"><h3 class="widget_title">COMMERCIAL &#038; MANAGEMENT</h3>			
 		<div class="widget_inner style_2">
 			<div class="skills_row odd first"><span class="legend" style="background-color:#0057A0;"></span><span class="caption">CIEL SAGE</span></div><div class="skills_row even"><span class="legend" style="background-color:#39D5FF;"></span><span class="caption">ZOHO</span></div><div class="skills_row odd"><span class="legend" style="background-color:#5EFAF7;"></span><span class="caption">ODOO</span></div><div class="skills_row even"><span class="legend" style="background-color:#39D5FF;"></span><span class="caption">MANTIS</span></div><div class="skills_row odd"><span class="legend" style="background-color:#009C41;"></span><span class="caption">AGILE SCRUM</span></div><div class="svg"><svg class="piechart" xmlns="http://www.w3.org/2000/svg"><path d="M66,66  L130,66  A64,64 0 0,1 73,130 z" fill="#0057A0"></path><path d="M66,66  L73,130  A64,64 0 0,1 6,89 z" fill="#39D5FF"></path><path d="M66,66  L6,89  A64,64 0 0,1 22,20 z" fill="#5EFAF7"></path><path d="M66,66  L22,20  A64,64 0 0,1 99,11 z" fill="#39D5FF"></path><path d="M66,66  L99,11  A64,64 0 0,1 130,66 z" fill="#009C41"></path><circle cx="66" cy="66" r="40" fill="#ffffff"></circle></svg></div>		</div>
-</aside><aside id="skills-widget-3" class="widget widget_skills"><h2 class="widget_title">LANGUES
+</aside><aside id="cvv" class="widget widget_skills"><h2 class="widget_title">LANGUES
 <input type="button" value="+" class="w3-button w3-xlarge w3-black" onclick="alert('le button marche ')" >
 			<input type="button"  value="-" class="w3-button w3-xlarge w3-teal">		
 </h2>	
