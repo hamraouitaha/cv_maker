@@ -2,7 +2,7 @@
 <html lang="fr-FR">
 <?php
 $test = file_get_contents("infor.json");
- $json=json_decode($test,true)
+ $json=json_decode($test,true);
  ?>
  <?php
   if( isset($_POST['username']) &&  isset($_POST['id'])){ 
@@ -15,20 +15,20 @@ $test = file_get_contents("infor.json");
 	file_put_contents('infor.json',$json);
 	}
 	if( isset($_POST['x']) ){ 
+	global $json,$x,$y,$w;
 		$test = file_get_contents("infor.json");
     $json = json_decode($test,true);
 	$n=1; 
-	$x=$_POST['x'].$n;
-	$y="K".$n;
-	$w="C".$n;
+	 $x=$_POST['x'].$n;
+	 $y="K".$n;
+	 $w="C".$n;
+	 $p="N".$n;
 	foreach ($json[0] as $i=>$j){
-	if($i == $y){
-			$n++;
+	if($i == $y ||  $i == $w || $i == $p ){
+		$n++;
 			$y="K".$n;
-		}
-			if($i == $w){
-			$n++;
-			$w="C".$n;
+				$w="C".$n;
+				   $p="N".$n++;
 		}
 	}
 	foreach ($json[1] as $i=>$j){
@@ -36,23 +36,29 @@ $test = file_get_contents("infor.json");
 			$n++;
 			$x=$_POST['x'].$n;
 		}
-	}
-		$json[0][$y]="click her";
-		$json[0][$w]="click her";
-	$ch=' <aside id="'.$x.'" class="widget widget_skills"><h3 class="widget_title">
-												<span class="td" id="'.$y.'" data-type="text"> '.$json[0][$y] .' </span>
-											    <input type="button"  value="-" class="w3-button w3-xlarge w3-teal" id="b2">
+	} 
+			$json[0][$y]="click her.....";
+			$json[0][$w]="click her.......";
+			$json[0][$p]="50%";
+				$ch="<aside id='".$x."'  class='widget widget_skills'><h3 class='widget_title'>
+												<span class='td' id='".$y."' data-type='text'>print $json[0][$y] </span>
+											    <input type='button'  value='-' class='w3-button w3-xlarge w3-teal' id='b2'>
 												</h3>
-		<div class="widget_inner style_1">
-			<div class="skills_row odd first"><span class="td" id="'.$w.'" data-type="text">'.$json[0][$w] .'</span>
-			<input type="button" value="+" class="w3-button w3-xlarge w3-black" id="b11" >
-			<input type="button"  value="-" class="w3-button w3-xlarge w3-teal" id="b22" >
-			<span class="progressbar"><span class="progress" style="background-color:#39D5FF;" rel="90%"><span class="value">90%</span></span></span></div>
+		<div class='widget_inner style_1'>
+			<div class='skills_row odd first'><span class='td' id='".$w."' data-type='text'> print $json[0][$y] </span>
+			<input type='button' value='+' class='w3-button w3-xlarge w3-black' id='b11'>
+			<input type='button'  value='-' class='w3-button w3-xlarge w3-teal' id='b22' >
+			<span class='progressbar'><span class='progress' style='background-color: rgb(57, 213, 255); ' rel='".$json[0][$p]."'>
+			<span class='value'><input type='button'  value='-' class='w3-button w3-xlarge w3-teal' id='b22' >
+			".$json[0][$p]."
+			<input type='button' value='+' class='w3-button w3-xlarge w3-black' id='b11'>
+			</span>
+			</span></span></div>
 			</div>
-</aside>';  
-	$json[1][$x]=$ch;  
+</aside>";  
+		$json[1][$x]=$ch;  
 			$json= json_encode($json);
-	file_put_contents('infor.json',$json);
+			file_put_contents('infor.json',$json);
 			}
 		 ?>
 <head>
@@ -61,7 +67,7 @@ $test = file_get_contents("infor.json");
 	<title><?php  echo $json[0]["T1"];  ?></title>
 	<link rel="profile" href="http://gmpg.org/xfn/11" />
 	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-	<link rel="stylesheet" href="http://127.0.0.1/cv_maker/\css\c1.css">
+	<link rel="stylesheet" href="http://127.0.0.1/cv_maker\css\c1.css">
 	<link rel="pingback" href="http://saklyayoub.tn/xmlrpc.php" />
 	<link href='http://fonts.googleapis.com/css?family=Lato:400,400italic,700,700italic&subset=latin,cyrillic-ext,latin-ext,cyrillic' rel='stylesheet' type='text/css'>
     	<!--[if lt IE 9]>
@@ -309,7 +315,6 @@ img.emoji {
 					jQuery(document).ready(function(){
 						jQuery('#b1').click(function(){
 							d= jQuery("span").closest("aside").attr("id");
-							alert(d);
 											jQuery.post(
 								"index.php",
 								{  
@@ -337,18 +342,20 @@ img.emoji {
 												<span class="td" id="Tk" data-type="text">
 												<?php echo $json[0]["Tk"]; ?></span>
 												<input type="button" value="+" class="w3-button w3-xlarge w3-black" id="b1" >
-											    <input type="button"  value="-" class="w3-button w3-xlarge w3-teal" id="b2">
 												</h3>
 		<div class="widget_inner style_1">
 			<div class="skills_row odd first"><span class="td" id="T9" data-type="text"><?php echo $json[0]["T9"] ?></span>
 			<input type="button" value="+" class="w3-button w3-xlarge w3-black" id="b11" >
 			<input type="button"  value="-" class="w3-button w3-xlarge w3-teal" id="b22" >
-			<span class="progressbar"><span class="progress" style="background-color:#39D5FF;" rel="90%"><span class="value">90%</span></span></span></div>
+			<span class="progressbar"><span class="progress" style="background-color:#39D5FF;" rel="90%"><span class="value">
+			<input type='button'  value='-' class='w3-button w3-xlarge w3-teal' id='b22' >
+			90%  
+			<input type='button' value='+' class='w3-button w3-xlarge w3-black' id='b11'></span></span></span></div>
 			</div>
 </aside><br><div id="a1">
 <?php 
-foreach($json[1]  as $i)
-echo $i."<br>";
+foreach($json[1]  as $i=>$j)
+print $j."<br>";
 ?>
 </div><aside id="cv2" class="widget widget_skills"><h3 class="widget_title">COMMERCIAL &#038; MANAGEMENT</h3>			
 		<div class="widget_inner style_2">
