@@ -1,23 +1,18 @@
 <!DOCTYPE html>
 <html lang="fr-FR">
 <?php
+global $json;
 $test = file_get_contents("infor.json");
  $json=json_decode($test,true);
- ?>
- <?php
+
   if( isset($_POST['username']) &&  isset($_POST['id'])){ 
-	$test = file_get_contents("infor.json");
-    $json = json_decode($test,true);
 	$ch=$_POST['username'];
 	$id=$_POST['id'];
     $json[0][$id]=$ch;
 			$json= json_encode($json);
-	file_put_contents('infor.json',$json);
+			file_put_contents('infor.json',$json);
 	}
 	if( isset($_POST['x']) ){ 
-	global $json,$x,$y,$w;
-		$test = file_get_contents("infor.json");
-    $json = json_decode($test,true);
 	$n=1; 
 	 $x=$_POST['x'].$n;
 	 $y="K".$n;
@@ -57,7 +52,7 @@ $test = file_get_contents("infor.json");
 			</div>
 </aside>";  
 		$json[1][$x]=$ch;  
-			$json= json_encode($json);
+		$json= json_encode($json);
 			file_put_contents('infor.json',$json);
 			}
 		 ?>
