@@ -32,19 +32,23 @@ $json = json_decode($test,true);
 	$champ2=$_POST['name2'];
 	
 	
-echo $ch;
- echo	$key1 ;
- echo $value1 ;
-echo	$champ1 ;
-echo	$key2 ;
-echo	$value2 ;
-echo	$champ2 ;
+//echo $ch;
+ //echo	$key1 ;
+ //echo $json[$value1] ;
+//echo	$champ1 ;
+//echo	$key2 ;
+foreach($value2 as $a)
+{ echo $a ;
+// echo $champ2 ;
+//echo	$a[$champ2] ;
+}
+//echo	$champ2 ;
 	
 	//$json[$id]=$ch;
    // $ch="hlhkhkhkhkhkkhkhkhkhkkkhkhh";
 	 // 
 	 
- $json[$key]{$champ}=$ch;
+ //$json[$key]{$champ}=$ch;
 	$new= json_encode($json);
 	file_put_contents('htmljson.json',$new);
  }

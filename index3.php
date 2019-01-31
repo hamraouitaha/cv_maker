@@ -310,7 +310,7 @@ function fnct(v,n) {
     jQuery(".tr").click(function() {
 	   c=jQuery(this).text();
 	  id1=jQuery(this).attr("id");
-	   console.log(id1);
+	  // console.log(id1);
 	jQuery(this).replaceWith('<input type="text"  id="12"value='+c+' class="tst" />');
     });	
 	jQuery("#12").blur(function() {
@@ -336,7 +336,7 @@ function fnct(v,n) {
 	}
 	
 	function fnct2(v1,n1,i1,v2,i2,n2) {
-    jQuery(".tr").click(function(v,n) {
+    jQuery(".tr").click(function(v,n)   {
 	   c=jQuery(this).text();
 	  
 	  id2=jQuery(this).attr("id");
@@ -345,8 +345,10 @@ function fnct(v,n) {
 	   console.log(id2);
 	jQuery(this).replaceWith('<input type="text"  id="12"value='+c+' class="tst" />');
     });	
+	//console.log(jQuery(id2).parent());
 	jQuery("#12").blur(function() {
 		k=jQuery(this).val();
+		
 		
 		jQuery(this).replaceWith('<span class="tr" id='+id2+'>' + k + '</span>');	
 		jQuery.post(
@@ -356,7 +358,7 @@ function fnct(v,n) {
 				key1:i1,
 				value1 :v1,
 				name1:n1,
-				key2:i2,
+				key2:id2,
 				value2:v2,
 				name2:n2,
             },
@@ -380,7 +382,7 @@ function fnct(v,n) {
 				           v1=value;
 						   
 						  // console.log(i);
-						   console.log(key);
+						  // console.log(key);
 						   n1="name1";
 						   i1=key;
 	               jQuery("#ici").append("<div class='category_header resume_category_header' onclick='fnct(v1,n1)' ><h3 class='category_title' style='background: #373737'><span class='category_title_icon' style='background-color:#3eb337'></span><span class='tr' id="+key+">"+ value.name1+"</span></h3></div>");
@@ -388,7 +390,7 @@ function fnct(v,n) {
           
 	                         //jQuery("#ici").append("<li><h3>"+ value.name1+ "</li><br>");
 	                                   jQuery.each(value.valeure, function(key2, value2) {
-		                                    console.log(value2);
+		                                  //  console.log(value2);
 											v2=value2;
 											i2=key2;
 											n2="name";         
