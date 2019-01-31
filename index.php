@@ -1,65 +1,58 @@
 <!DOCTYPE html>
 <html lang="fr-FR">
-<?php
+<?phpglobal $json;
 $test = file_get_contents("infor.json");
  $json=json_decode($test,true);
- ?>
- <?php
   if( isset($_POST['username']) &&  isset($_POST['id'])){ 
-	$test = file_get_contents("infor.json");
-    $json = json_decode($test,true);
 	$ch=$_POST['username'];
 	$id=$_POST['id'];
     $json[0][$id]=$ch;
 			$json= json_encode($json);
-	file_put_contents('infor.json',$json);
-	}
-	if( isset($_POST['x']) ){ 
-	global $json,$x,$y,$w;
-		$test = file_get_contents("infor.json");
-    $json = json_decode($test,true);
-	$n=1; 
-	 $x=$_POST['x'].$n;
-	 $y="K".$n;
-	 $w="C".$n;
-	 $p="N".$n;
-	foreach ($json[0] as $i=>$j){
-	if($i == $y ||  $i == $w || $i == $p ){
-		$n++;
-			$y="K".$n;
-				$w="C".$n;
-				   $p="N".$n++;
-		}
-	}
-	foreach ($json[1] as $i=>$j){
-		if($i == $x) {
-			$n++;
-			$x=$_POST['x'].$n;
-		}
-	} 
-			$json[0][$y]="click her.....";
-			$json[0][$w]="click her.......";
-			$json[0][$p]="50%";
-				$ch="<aside id='".$x."'  class='widget widget_skills'><h3 class='widget_title'>
-												<span class='td' id='".$y."' data-type='text'>print $json[0][$y] </span>
-											    <input type='button'  value='-' class='w3-button w3-xlarge w3-teal' id='b2'>
-												</h3>
-		<div class='widget_inner style_1'>
-			<div class='skills_row odd first'><span class='td' id='".$w."' data-type='text'> print $json[0][$y] </span>
-			<input type='button' value='+' class='w3-button w3-xlarge w3-black' id='b11'>
-			<input type='button'  value='-' class='w3-button w3-xlarge w3-teal' id='b22' >
-			<span class='progressbar'><span class='progress' style='background-color: rgb(57, 213, 255); ' rel='".$json[0][$p]."'>
-			<span class='value'><input type='button'  value='-' class='w3-button w3-xlarge w3-teal' id='b22' >
-			".$json[0][$p]."
-			<input type='button' value='+' class='w3-button w3-xlarge w3-black' id='b11'>
-			</span>
-			</span></span></div>
-			</div>
-</aside>";  
-		$json[1][$x]=$ch;  
-			$json= json_encode($json);
 			file_put_contents('infor.json',$json);
-			}
+	}
+if(isset($_POST['nom']) ) { 
+	$test = file_get_contents("info.json");
+	 $json = json_decode($test,true);
+	$ch=$_POST['nom'];
+	 $key=$_POST['key'];
+	$value=$_POST['value'];
+	$champ=$_POST['name'];
+	 echo $key ; 
+ $json[$key][$champ]=$ch;
+	$new= json_encode($json);
+	file_put_contents('info.json',$new);
+ }
+			//iiiiiimmmmmmmmaaaaaaaaggggggggggggggggggggeeeeeessssss
+			if(isset($_FILES['image']['name']))
+{
+//if no errors...
+if(!$_FILES['image']['error'])
+{
+	$v=1;
+//now is the time to modify the future file name and validate the file
+$new_file_name =basename($_FILES['image']['name']); //rename file
+if($_FILES['image']['size'] > (2048000)) //can't be larger than 1 MB
+{
+$v= 0;
+$message = 'Oops! Your file\'s size is to large.';
+}
+//if the file has passed the test
+if($v)
+{
+//move it to where we want it to be
+move_uploaded_file($_FILES['image']['tmp_name'] , "images/".$new_file_name);
+$message = 'Congratulations! Your file was accepted.';
+}
+}
+//if there is an error...
+else
+{
+//set that to be the returned message
+$message = 'Ooops! Your upload triggered the following error: '.$_FILES['image']['error'];
+}
+$json[0]['img']="http://127.0.0.1/cv_maker/images/".basename($_FILES['image']['name']);
+// sjo
+}
 		 ?>
 <head>
 		<meta charset="UTF-8" />
@@ -233,7 +226,7 @@ img.emoji {
                 <header id="header" class="site_header" role="banner">
 							<div class="social_links">
 					<ul>
-												<li class="fb"><a target="_blank" href="https://www.facebook.com/ziedtuihri">Facebook</a></li>																		<li class="lnkd"><a target="_blank" href="https://www.linkedin.com/in/sakly-ayoub-ba269391">Linkedin</a></li>																		<li class="skp"><a target="_blank" href="skype:saklyayoub@live.com" class="skp">Skype</a></li>																											
+												<li class="fb"><a target="_blank" href="https://www.facebook.com/ziedtuihri">Facebook</a></li><li class="lnkd"><a target="_blank" href="https://www.linkedin.com/in/sakly-ayoub-ba269391">Linkedin</a></li>																		<li class="skp"><a target="_blank" href="skype:saklyayoub@live.com" class="skp">Skype</a></li>																											
 					</ul>
 				</div>
 			        </header>
@@ -247,7 +240,12 @@ img.emoji {
 					<script src="http://127.0.0.1/cv_maker/\js\post.js"> </script>					
                         <div id="profile_user">
                <div id="profile_photo">			   
-			   <img src="<?php echo $json[0]['T8'] ;?>" alt="zied tuihri" /></div>
+			   <span id="img" class="img" data-type=""> 
+			   
+			   <input type="file" name="image" size="25" style="display:none;" /><input type="submit" name="submit" value="Submit" style="display:none;" />
+			   
+			   <img id="im" src="<?php echo $json[0]['img'] ;?>" alt="name" /></div>
+			   </span>
               <div id="profile_name_area">
                                 <div id="profile_name">
                                                 <h1 id="profile_title"><span class="firstname"><?php 
@@ -312,31 +310,60 @@ img.emoji {
                 <div class="section_body resume_section_body">
                     <div class="sidebar resume_sidebar">
 					<script>
+function fnct(v,n) {
+    jQuery(".tr").click(function() {
+	   c=jQuery(this).text();
+        id1=jQuery(this).attr("id");
+	jQuery(this).replaceWith('<input type="text"  id="12"  value="'+c+'" class="tst" />');
+    });
+	jQuery("#12").blur(function() {
+		k=jQuery(this).val();
+	jQuery(this).replaceWith('<span class="tr" id="id1">' + k + '</span>');	
+		jQuery.post(
+            "index.php", 
+            {
+                nom : jQuery(this).val(),
+				key:id1,
+				value :v,
+				name:n,
+            },
+           function(data){
+                jQuery(".tst").html(data);
+           });
+	});
+	}
 					jQuery(document).ready(function(){
 						jQuery('#b1').click(function(){
-							d= jQuery("span").closest("aside").attr("id");
-											jQuery.post(
-								"index.php",
-								{  
-									x : d
-								}
-							   );  location.reload();
-							});  
-						jQuery('#b2').click(function(){
-							jQuery.post(
-								"index.php",
-								{
-									n : "1",
-								}
-							   );
-                });
-				jQuery('#b11').click(function(){
-					jQuery('#').after();
-				});
-				jQuery('#b22').click(function(){
-					jQuery('#').after();
-				});
-            });
+
+								});
+								});
+							jQuery.getJSON("info.json", function(result){ 
+					 jQuery.each(result, function(key, value){
+								v1=value;
+						   n1="name";
+					 jQuery("#a1").append("<h3 class='widget_title' onclick='fnct(v1,n1)'><span class='tr' id='"+key+"'>"+ value.name+ "</span><input type='button' value='+' class='w3-button w3-xlarge w3-black' id='b1'><input type='button' value='-' class='w3-button w3-xlarge w3-teal' id='b2'></h3> "); 
+					 jQuery.each(value.skills, function(key2, value2) { 
+							jQuery("#a1").append("<div class='widget_inner style_1' onclick='fnct()'><div class='skills_row odd first'><span class='tr' onclick='fnct()'>"+ value2.n+ " </span><input type='button' value='+' class='w3-button w3-xlarge w3-black' id='b11'><input type='button' value='-' class='w3-button w3-xlarge w3-teal' id='b22'><br><span class='progressbar'><span class='progress' style='background-color: rgb(57, 213, 255); width:'+value2.p+';' rel='"+value2.p+"'><span class='value'> "+value2.p+"</span></span></span></div></div><br>");
+							
+						});
+					});
+		 });
+	
+						// jQuery('#b2').click(function(){
+							// jQuery.post(
+								// "index.php",
+								// {
+									// n : "1",
+								// }
+							   // );
+                // });
+				// jQuery('#b11').click(function(){
+					// jQuery('#').after();
+				// });
+				// jQuery('#b22').click(function(){
+					// jQuery('#').after();
+				// });
+            
 			</script>
                                                 <aside id="cv" class="widget widget_skills"><h3 class="widget_title">
 												<span class="td" id="Tk" data-type="text">
@@ -347,17 +374,16 @@ img.emoji {
 			<div class="skills_row odd first"><span class="td" id="T9" data-type="text"><?php echo $json[0]["T9"] ?></span>
 			<input type="button" value="+" class="w3-button w3-xlarge w3-black" id="b11" >
 			<input type="button"  value="-" class="w3-button w3-xlarge w3-teal" id="b22" >
-			<span class="progressbar"><span class="progress" style="background-color:#39D5FF;" rel="90%"><span class="value">
+			<span class="progressbar"><span class="progress" style="background-color:#39D5FF;" rel="<?php  echo $json[0]['N0'];  ?>"><span class="value">
 			<input type='button'  value='-' class='w3-button w3-xlarge w3-teal' id='b22' >
-			90%  
+			<?php  echo $json[0]['N0'];   ?>
 			<input type='button' value='+' class='w3-button w3-xlarge w3-black' id='b11'></span></span></span></div>
 			</div>
-</aside><br><div id="a1">
-<?php 
-foreach($json[1]  as $i=>$j)
-print $j."<br>";
-?>
-</div><aside id="cv2" class="widget widget_skills"><h3 class="widget_title">COMMERCIAL &#038; MANAGEMENT</h3>			
+</aside>
+<aside class="widget widget_skills" id="a1">
+
+</aside>
+<aside id="cv2" class="widget widget_skills"><h3 class="widget_title">COMMERCIAL &#038; MANAGEMENT</h3>			
 		<div class="widget_inner style_2">
 			<div class="skills_row odd first"><span class="legend" style="background-color:#0057A0;"></span><span class="caption">CIEL SAGE</span></div><div class="skills_row even"><span class="legend" style="background-color:#39D5FF;"></span><span class="caption">ZOHO</span></div><div class="skills_row odd"><span class="legend" style="background-color:#5EFAF7;"></span><span class="caption">ODOO</span></div><div class="skills_row even"><span class="legend" style="background-color:#39D5FF;"></span><span class="caption">MANTIS</span></div><div class="skills_row odd"><span class="legend" style="background-color:#009C41;"></span><span class="caption">AGILE SCRUM</span></div><div class="svg"><svg class="piechart" xmlns="http://www.w3.org/2000/svg"><path d="M66,66  L130,66  A64,64 0 0,1 73,130 z" fill="#0057A0"></path><path d="M66,66  L73,130  A64,64 0 0,1 6,89 z" fill="#39D5FF"></path><path d="M66,66  L6,89  A64,64 0 0,1 22,20 z" fill="#5EFAF7"></path><path d="M66,66  L22,20  A64,64 0 0,1 99,11 z" fill="#39D5FF"></path><path d="M66,66  L99,11  A64,64 0 0,1 130,66 z" fill="#009C41"></path><circle cx="66" cy="66" r="40" fill="#ffffff"></circle></svg></div>		</div>
 </aside><aside id="cvv" class="widget widget_skills"><h2 class="widget_title">LANGUES

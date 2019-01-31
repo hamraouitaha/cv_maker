@@ -5,14 +5,19 @@
 			 ch='<input type="'+type+'" class="tst" />';
 			 if(idc == "T6")
 			ch='<textarea cols="110" rows="4" type="text" class="tst"></textarea>';
-			 //image......
+		if(idc=="img"){
+			ch='<input type="file" name="image" size="25" /><input type="submit" name="submit" value="Submit" />';
+		}
+			 //image....
 			c=jQuery(this).text();
 			jQuery(this).replaceWith(ch);
 			jQuery(".tst").val(c);
 		jQuery(".tst").blur(function(t) {
+        jQuery(this).serialize();
 		k=jQuery(this).val();
 		if(k !=""){
 		jQuery(this).replaceWith('<span class="td" >' + k + '</span>');		
+		
 		jQuery.post(
             "index.php", 
             {
@@ -23,7 +28,10 @@
                 jQuery(".tst").html(data);
            });
 		   location.reload();
+
 }
 		}) ;
 		 });
 		});	
+			
+		
