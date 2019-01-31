@@ -348,7 +348,7 @@ alert(k);
 	
 	
 	
-	function fnct2(v1,n,i,v2,i2,n2) {
+	/*function fnct2(v1,n,i,v2,i2,n2) {
     jQuery(".tr").click(function(v,n) {
 	   c=jQuery(this).text();
 	   alert(c);
@@ -379,7 +379,7 @@ alert(k);
 	});
 
 	
-	}
+	}*/
 		
 		
 	jQuery(document).ready(function(){
