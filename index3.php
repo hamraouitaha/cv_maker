@@ -306,22 +306,15 @@ echo $i."<br>";
 </form>
                     <div class="wrapper resume_wrapper">
 					<script>
-					
-		
-
 function fnct(v,n) {
     jQuery(".tr").click(function() {
 	   c=jQuery(this).text();
-	   alert(c);
 	  id1=jQuery(this).attr("id");
-	  	   alert("here");
-
 	   console.log(id1);
 	jQuery(this).replaceWith('<input type="text"  id="12"value='+c+' class="tst" />');
     });	
 	jQuery("#12").blur(function() {
-		k=jQuery(this).val();
-alert(k);		
+		k=jQuery(this).val();		
 	jQuery(this).replaceWith('<span class="tr" id='+id1+' >' + k + '</span>');	
 		jQuery.post(
             "test.php", 
@@ -342,16 +335,10 @@ alert(k);
 	
 	}
 	
-	
-	
-	
-	
-	
-	
-	/*function fnct2(v1,n,i,v2,i2,n2) {
+	function fnct2(v1,n1,i1,v2,i2,n2) {
     jQuery(".tr").click(function(v,n) {
 	   c=jQuery(this).text();
-	   alert(c);
+	  
 	  id2=jQuery(this).attr("id");
 	  	  // alert("here");
 
@@ -360,15 +347,18 @@ alert(k);
     });	
 	jQuery("#12").blur(function() {
 		k=jQuery(this).val();
-alert(k);		
-		jQuery(this).replaceWith('<span class="tr" id='+id2'>' + k + '</span>');	
+		
+		jQuery(this).replaceWith('<span class="tr" id='+id2+'>' + k + '</span>');	
 		jQuery.post(
             "test.php", 
             {
-                nom : jQuery(this).val(),
-				key1:i,
-				value1 :v,
-				name:n,
+                nom1 : jQuery(this).val(),
+				key1:i1,
+				value1 :v1,
+				name1:n1,
+				key2:i2,
+				value2:v2,
+				name2:n2,
             },
            function(data){
                 jQuery(".tst").html(data);
@@ -379,12 +369,12 @@ alert(k);
 	});
 
 	
-	}*/
+	}
 		
 		
 	jQuery(document).ready(function(){
        
-          jQuery.getJSON("htmljson4.json", function(result){
+          jQuery.getJSON("htmljson.json", function(result){
 			
 	            jQuery.each(result, function(key, value) { 
 				           v1=value;
@@ -404,7 +394,6 @@ alert(k);
 											n2="name";         
                                                  jQuery("#ici").append("<div class='post_header resume_post_header' onclick=fnct2(v1,n1,i1,v2,n2,i2)><div class='resume_period'><span class='period_from'>07.2017 - </span><span class='period_to period_present'>present</span></div><h4 class='post_title'><span class='post_title_icon' style='background-color: #3eb337'></span><span id="+key2+" class='tr'>"+ value2.name+"                                            </h4><h5 class='post_subtitle'>Administrateur Système, Webdesigner</h5></div>");
                                                 
-
 												// jQuery("#ici").append("<li><h4>"+ value2.name+ "</li>");
                                                       jQuery("#ici").append("<li>"+ value2.date+ "</li>");
 	   	                                                       jQuery.each(value2.article, function(key2, value3) {
@@ -420,17 +409,8 @@ alert(k);
    
    
    	
-	})
-    
-		
-		
-												  
-													  
-												  
-														
-													 
-                                                    
-													 </script>	
+	})						
+	</script>	
 					
 					                              <form>
 												 
