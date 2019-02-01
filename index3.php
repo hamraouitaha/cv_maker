@@ -377,23 +377,30 @@ function fnct(v,n) {
 	jQuery(document).ready(function(){
        
           jQuery.getJSON("htmljson.json", function(result){
-			
+			i=0;
 	            jQuery.each(result, function(key, value) { 
 				           v1=value;
-						   
+						  
 						  // console.log(i);
 						  // console.log(key);
 						   n1="name1";
 						   i1=key;
+						  
+						   console.log(i);
 	               jQuery("#ici").append("<div class='category_header resume_category_header' onclick='fnct(v1,n1)' ><h3 class='category_title' style='background: #373737'><span class='category_title_icon' style='background-color:#3eb337'></span><span class='tr' id="+key+">"+ value.name1+"</span></h3></div>");
 	                       
-          
+                                    
 	                         //jQuery("#ici").append("<li><h3>"+ value.name1+ "</li><br>");
 	                                   jQuery.each(value.valeure, function(key2, value2) {
-		                                  //  console.log(value2);
-											v2=value2;
+										   i=i+1; 
+										   
+										    
+		                                    
+											v2=result[i];
 											i2=key2;
-											n2="name";         
+											n2="name";
+		                                   console.log(v2);
+											
                                                  jQuery("#ici").append("<div class='post_header resume_post_header' onclick=fnct2(v1,n1,i1,v2,n2,i2)><div class='resume_period'><span class='period_from'>07.2017 - </span><span class='period_to period_present'>present</span></div><h4 class='post_title'><span class='post_title_icon' style='background-color: #3eb337'></span><span id="+key2+" class='tr'>"+ value2.name+"                                            </h4><h5 class='post_subtitle'>Administrateur Système, Webdesigner</h5></div>");
                                                 
 												// jQuery("#ici").append("<li><h4>"+ value2.name+ "</li>");

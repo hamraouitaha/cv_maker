@@ -12,7 +12,7 @@ $json = json_decode($test,true);
 	//$json[$id]=$ch;
    // $ch="hlhkhkhkhkhkkhkhkhkhkkkhkhh";
 	 // 
-	 echo $key ; 
+	 echo $ch ; 
  $json[$key]{$champ}=$ch;
 	$new= json_encode($json);
 	file_put_contents('htmljson.json',$new);
