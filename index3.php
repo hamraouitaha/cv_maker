@@ -327,9 +327,6 @@ function fnct(n) {
            });
 	       });
 	}
-	
-	
-	
 	function fnct2(n) {
     jQuery(".tr").click(function()   {
 	   c=jQuery(this).text();
@@ -389,22 +386,27 @@ function fnct(n) {
 	});
 
 	
-	}
-		
-		
+	}	
 	jQuery(document).ready(function(){
        
-          jQuery.getJSON("htmljson.json", function(result){
+          jQuery.getJSON("info.json", function(result){
 			i=-1;
 	             jQuery.each(result, function(key, value) {
 						   n1="name1";
-	                       jQuery("#ici").append("<div class='category_header resume_category_header' onclick='fnct(n1)' ><h3 class='category_title' style='background: #373737'><span class='category_title_icon' style='background-color:#3eb337'></span><span class='tr' id="+key+">"+ value.name1+"</span></h3></div>");
+	                       jQuery("#ici").append("<div class='category_header resume_category_header' onclick='fnct(n1)' ><h3 class='category_title' style='background: #373737'><span class='category_title_icon' style='background-color:#3eb337'></span><span class='tr' id="+key+">"+ value.name1+"<input type='button' value='+'id='B1' style='background-color: #666666; float:right'><input type='button' value='-' style='background-color: #808080; float:right'></span></h3></div>");
 	                       i=i+1;
 						   j=-1;
+			
+   
 	             jQuery.each(value.valeure, function(key2, value2) {
 											n2="name";
-                                           jQuery("#ici").append("<div class='post_header resume_post_header' onclick=fnct2(n2)><div class='resume_period'><span class='period_from'>07.2017 - </span><span class='period_to period_present'>present</span></div><h4 class='post_title'><span class='post_title_icon' style='background-color: #3eb337'></span><span id="+key2+" data="+i+" class='tr'>"+ value2.name+"                                            </h4><h5 class='post_subtitle'>Administrateur Système, Webdesigner</h5></div><p>Ma mission était de :</p>");
+                                           jQuery("#ici").append("<div class='post_header resume_post_header' onclick=fnct2(n2)><div class='resume_period'><input type='button' value='+' id='B1' style='background-color: #666666; float:right'><input type='button' value='-' style='background-color: #808080; float:right'><span class='period_from'>07.2017 - </span><span class='period_to period_present'>present</span></div><h4 class='post_title'><span class='post_title_icon' style='background-color: #3eb337'></span><span id="+key2+" data="+i+" class='tr'>"+ value2.name+"</h4><h5 class='post_subtitle'></h5></div><p>Ma mission était de :</p>");
                                             j=j+1;
+														     jQuery("#B1").click(function(){
+         
+			alert("welcom");
+	      
+	});
 	   	            jQuery.each(value2.article, function(key2, value3) {
 						                     n3="article";
                                             jQuery("#ici").append("<div class='post_body resume_post_body' onclick='fnct3(n3)'><span class='tr' id="+key2+" data="+i+" data2="+j+">"+ value3+"</div>");
@@ -415,25 +417,16 @@ function fnct(n) {
 	});
 	});
    
-	  
-   
+	
    
    	
-	})						
-	</script>	
+	})											 </script>	
 					
-					                              <form>
-												 
-												<a class="tr">iciiiiillllll45454645<a>
-                                               
-<a class="w3-button w3-xlarge w3-black" id="pluscfe" >+</a>
-<?php echo $json[0]['T15']?>
-
-<div id="ici" >  herrrreeee
-
-
-
-</div>
+			<a class="tr">
+	<input type='button' value='+' id='B1' style='background-color: #666666; float:right'"></a>		                          
+<div id="ici" ></div>
+	
+	</script>	
 					<div class="contact_form">
                     	<div class="contact_form_data">
 							
