@@ -6,17 +6,14 @@ $json = json_decode($test,true);
  
 	$ch=$_POST['nom'];
 	$key=$_POST['key'];
-	$value=$_POST['value'];
 	$champ=$_POST['name'];
-	
-	//$json[$id]=$ch;
-   // $ch="hlhkhkhkhkhkkhkhkhkhkkkhkhh";
-	 // 
-	 echo $ch ; 
+	 
  $json[$key]{$champ}=$ch;
 	$new= json_encode($json);
 	file_put_contents('htmljson.json',$new);
  }
+ 
+ 
  
  if( isset($_POST['nom1']) ) {
 	 
@@ -24,36 +21,39 @@ $json = json_decode($test,true);
 $json = json_decode($test,true);
  
 	$ch=$_POST['nom1'];
+	$key=$_POST['key'];
 	$key1=$_POST['key1'];
-	$value1=$_POST['value1'];
-	$champ1=$_POST['name1'];
-	$key2=$_POST['key2'];
-	$value2=$_POST['value2'];
-	$champ2=$_POST['name2'];
+	$name=$_POST['name'];
+	$champ="valeure";
+	echo $key1;
+	echo $champ;
+	echo $key;
 	
-	
-//echo $ch;
- //echo	$key1 ;
- //echo $json[$value1] ;
-//echo	$champ1 ;
-//echo	$key2 ;
-foreach($value2 as $a)
-{ echo $a ;
-// echo $champ2 ;
-//echo	$a[$champ2] ;
-}
-//echo	$champ2 ;
-	
-	//$json[$id]=$ch;
-   // $ch="hlhkhkhkhkhkkhkhkhkhkkkhkhh";
-	 // 
-	 
- //$json[$key]{$champ}=$ch;
+	$json[$key1][$champ][$key][$name]=$ch;
 	$new= json_encode($json);
 	file_put_contents('htmljson.json',$new);
  }
  
-
  
+ if( isset($_POST['nom2']) ) {
+	 
+	$test = file_get_contents("htmljson.json");
+$json = json_decode($test,true);
  
+	$ch=$_POST['nom2'];
+	$key=$_POST['key'];
+	$key1=$_POST['key1'];
+	$key2=$_POST['key2'];
+	$name=$_POST['name'];
+	$champ="valeure";
+	echo $key1;
+	echo $champ;
+	echo $key2;
+	echo $name;
+	echo $key;
+	
+	$json[$key1][$champ][$key2][$name][$key]=$ch;
+	$new= json_encode($json);
+	file_put_contents('htmljson.json',$new);
+ }
 ?>

@@ -306,11 +306,10 @@ echo $i."<br>";
 </form>
                     <div class="wrapper resume_wrapper">
 					<script>
-function fnct(v,n) {
+function fnct(n) {
     jQuery(".tr").click(function() {
 	   c=jQuery(this).text();
 	  id1=jQuery(this).attr("id");
-	  // console.log(id1);
 	jQuery(this).replaceWith('<input type="text"  id="12"value='+c+' class="tst" />');
     });	
 	jQuery("#12").blur(function() {
@@ -321,7 +320,33 @@ function fnct(v,n) {
             {
                 nom : jQuery(this).val(),
 				key:id1,
-				value :v,
+				name:n,
+            },
+           function(data){
+                jQuery(".tst").html(data);
+           });
+	       });
+	}
+	
+	
+	
+	function fnct2(n) {
+    jQuery(".tr").click(function()   {
+	   c=jQuery(this).text();
+	  id1=jQuery(this).attr("id");
+	  tab=jQuery(this).attr("data");
+	jQuery(this).replaceWith('<input type="text"  id="12"value='+c+' class="tst" />');
+    });	
+
+	jQuery("#12").blur(function() {
+		k=jQuery(this).val();
+		jQuery(this).replaceWith('<span class="tr" id='+id1+'>' + k + '</span>');	
+		jQuery.post(
+            "test.php", 
+            {
+                nom1 : jQuery(this).val(),
+				key:id1,
+				key1:tab,
 				name:n,
             },
            function(data){
@@ -335,32 +360,25 @@ function fnct(v,n) {
 	
 	}
 	
-	function fnct2(v1,n1,i1,v2,i2,n2) {
-    jQuery(".tr").click(function(v,n)   {
+	function fnct3(n) {
+    jQuery(".tr").click(function()   {
 	   c=jQuery(this).text();
-	  
-	  id2=jQuery(this).attr("id");
-	  	  // alert("here");
-
-	   console.log(id2);
+	  id1=jQuery(this).attr("id");
+	  tab=jQuery(this).attr("data");
+	  tab2=jQuery(this).attr("data2");
 	jQuery(this).replaceWith('<input type="text"  id="12"value='+c+' class="tst" />');
     });	
-	//console.log(jQuery(id2).parent());
 	jQuery("#12").blur(function() {
 		k=jQuery(this).val();
-		
-		
-		jQuery(this).replaceWith('<span class="tr" id='+id2+'>' + k + '</span>');	
+		jQuery(this).replaceWith('<span class="tr" id='+id1+'>' + k + '</span>');	
 		jQuery.post(
             "test.php", 
             {
-                nom1 : jQuery(this).val(),
-				key1:i1,
-				value1 :v1,
-				name1:n1,
-				key2:id2,
-				value2:v2,
-				name2:n2,
+                nom2 : jQuery(this).val(),
+				key:id1,
+				key1:tab,
+				key2:tab2,
+				name:n,
             },
            function(data){
                 jQuery(".tst").html(data);
@@ -377,37 +395,20 @@ function fnct(v,n) {
 	jQuery(document).ready(function(){
        
           jQuery.getJSON("htmljson.json", function(result){
-			i=0;
-	            jQuery.each(result, function(key, value) { 
-				           v1=value;
-						  
-						  // console.log(i);
-						  // console.log(key);
+			i=-1;
+	             jQuery.each(result, function(key, value) {
 						   n1="name1";
-						   i1=key;
-						  
-						   console.log(i);
-	               jQuery("#ici").append("<div class='category_header resume_category_header' onclick='fnct(v1,n1)' ><h3 class='category_title' style='background: #373737'><span class='category_title_icon' style='background-color:#3eb337'></span><span class='tr' id="+key+">"+ value.name1+"</span></h3></div>");
-	                       
-                                    
-	                         //jQuery("#ici").append("<li><h3>"+ value.name1+ "</li><br>");
-	                                   jQuery.each(value.valeure, function(key2, value2) {
-										   i=i+1; 
-										   
-										    
-		                                    
-											v2=result[i];
-											i2=key2;
+	                       jQuery("#ici").append("<div class='category_header resume_category_header' onclick='fnct(n1)' ><h3 class='category_title' style='background: #373737'><span class='category_title_icon' style='background-color:#3eb337'></span><span class='tr' id="+key+">"+ value.name1+"</span></h3></div>");
+	                       i=i+1;
+						   j=-1;
+	             jQuery.each(value.valeure, function(key2, value2) {
 											n2="name";
-		                                   console.log(v2);
-											
-                                                 jQuery("#ici").append("<div class='post_header resume_post_header' onclick=fnct2(v1,n1,i1,v2,n2,i2)><div class='resume_period'><span class='period_from'>07.2017 - </span><span class='period_to period_present'>present</span></div><h4 class='post_title'><span class='post_title_icon' style='background-color: #3eb337'></span><span id="+key2+" class='tr'>"+ value2.name+"                                            </h4><h5 class='post_subtitle'>Administrateur Système, Webdesigner</h5></div>");
-                                                
-												// jQuery("#ici").append("<li><h4>"+ value2.name+ "</li>");
-                                                      jQuery("#ici").append("<li>"+ value2.date+ "</li>");
-	   	                                                       jQuery.each(value2.article, function(key2, value3) {
-                                                                    jQuery("#ici").append("<div class='post_body resume_post_body'><p>Ma mission était de :</p>"+ value3+"</div>");
-                                                                             // jQuery("#ici").append("<li>"+ value3+ "</li>");
+                                           jQuery("#ici").append("<div class='post_header resume_post_header' onclick=fnct2(n2)><div class='resume_period'><span class='period_from'>07.2017 - </span><span class='period_to period_present'>present</span></div><h4 class='post_title'><span class='post_title_icon' style='background-color: #3eb337'></span><span id="+key2+" data="+i+" class='tr'>"+ value2.name+"                                            </h4><h5 class='post_subtitle'>Administrateur Système, Webdesigner</h5></div><p>Ma mission était de :</p>");
+                                            j=j+1;
+	   	            jQuery.each(value2.article, function(key2, value3) {
+						                     n3="article";
+                                            jQuery("#ici").append("<div class='post_body resume_post_body' onclick='fnct3(n3)'><span class='tr' id="+key2+" data="+i+" data2="+j+">"+ value3+"</div>");
+                                                         
 			            	 });
 			                                                           	 jQuery("#ici").append("<br>");
 		                               });
