@@ -1,24 +1,31 @@
 <!DOCTYPE html>
 <html lang="fr-FR">
-<?phpglobal $json;
+<?php
+global $json;
 $test = file_get_contents("infor.json");
  $json=json_decode($test,true);
   if( isset($_POST['username']) &&  isset($_POST['id'])){ 
 	$ch=$_POST['username'];
 	$id=$_POST['id'];
     $json[0][$id]=$ch;
-			$json= json_encode($json);
-			file_put_contents('infor.json',$json);
+			$new= json_encode($json);
+	file_put_contents('infor.json',$new);
 	}
-if(isset($_POST['nom']) ) { 
+if(isset($_POST['ch2']) ) { 
 	$test = file_get_contents("info.json");
 	 $json = json_decode($test,true);
-	$ch=$_POST['nom'];
+	$ch=$_POST['ch2'];
 	 $key=$_POST['key'];
-	$value=$_POST['value'];
-	$champ=$_POST['name'];
-	 echo $key ; 
- $json[$key][$champ]=$ch;
+ $json[0][$key]=$ch;
+	$new= json_encode($json);
+	file_put_contents('info.json',$new);
+ }
+if(isset($_POST['ch3']) ) { 
+	$test = file_get_contents("info.json");
+	 $json = json_decode($test,true);
+	$ch=$_POST['ch3'];
+	 $key=$_POST['key3'];
+ $json[0][$key][0]['n']=$ch;
 	$new= json_encode($json);
 	file_put_contents('info.json',$new);
  }
@@ -30,8 +37,8 @@ if(!$_FILES['image']['error'])
 {
 	$v=1;
 //now is the time to modify the future file name and validate the file
-$new_file_name =basename($_FILES['image']['name']); //rename file
-if($_FILES['image']['size'] > (2048000)) //can't be larger than 1 MB
+$new_file_name =$_FILES['image']['name']; //rename file
+if($_FILES['image']['size'] > (2048000)) //can't be larger than 2 MB
 {
 $v= 0;
 $message = 'Oops! Your file\'s size is to large.';
@@ -50,8 +57,10 @@ else
 //set that to be the returned message
 $message = 'Ooops! Your upload triggered the following error: '.$_FILES['image']['error'];
 }
-$json[0]['img']="http://127.0.0.1/cv_maker/images/".basename($_FILES['image']['name']);
+$json[0]['img']="http://127.0.0.1//cv_maker//images//".$_FILES['image']['name'];
 // sjo
+$new= json_encode($json);
+	file_put_contents('infor.json',$new);
 }
 		 ?>
 <head>
@@ -240,12 +249,11 @@ img.emoji {
 					<script src="http://127.0.0.1/cv_maker/\js\post.js"> </script>					
                         <div id="profile_user">
                <div id="profile_photo">			   
-			   <span id="img" class="img" data-type=""> 
+			   <span id="img11" class="img" data-type="image"> 
 			   
-			   <input type="file" name="image" size="25" style="display:none;" /><input type="submit" name="submit" value="Submit" style="display:none;" />
+			   <input type="file" name="image" size="25" id="but2"  style="display: none;"/><button id="but1" style="display: none;" >envoyé</button>
 			   
-			   <img id="im" src="<?php echo $json[0]['img'] ;?>" alt="name" /></div>
-			   </span>
+			   <img id="im" src=" <?php echo $json[0]['img'];  ?>"  /></span></div>
               <div id="profile_name_area">
                                 <div id="profile_name">
                                                 <h1 id="profile_title"><span class="firstname"><?php 
@@ -310,7 +318,7 @@ img.emoji {
                 <div class="section_body resume_section_body">
                     <div class="sidebar resume_sidebar">
 					<script>
-function fnct(v,n) {
+function fnct1() {
     jQuery(".tr").click(function() {
 	   c=jQuery(this).text();
         id1=jQuery(this).attr("id");
@@ -318,52 +326,48 @@ function fnct(v,n) {
     });
 	jQuery("#12").blur(function() {
 		k=jQuery(this).val();
-	jQuery(this).replaceWith('<span class="tr" id="id1">' + k + '</span>');	
+	jQuery(this).replaceWith('<span class="tr" id="'+id1+'">' + k + '</span>');	
 		jQuery.post(
             "index.php", 
-            {
-                nom : jQuery(this).val(),
+            { 
+                ch2 :k,
 				key:id1,
-				value :v,
-				name:n,
-            },
+            }, 
            function(data){
                 jQuery(".tst").html(data);
            });
 	});
 	}
-					jQuery(document).ready(function(){
-						jQuery('#b1').click(function(){
-
+function fnct2() {
+    jQuery(".tr").click(function() {
+	   c=jQuery(this).text();
+        id1=jQuery(this).attr("id");
+	jQuery(this).replaceWith('<input type="text"  id="12"  value="'+c+'" class="tst" />');
+    }); 
+	jQuery("#12").blur(function() {
+		k=jQuery(this).val();
+	jQuery(this).replaceWith('<span class="tr" id="'+id1+'">' + k + '</span>');	
+		jQuery.post(
+            "index.php", 
+            { 
+                ch3 :k,
+				key3 :id1,
+            }, 
+           function(data){
+                jQuery(".tst").html(data);
+           });
+	});
+	}
+					jQuery(document).ready(function(){ 
+						jQuery('#b1').click(function(){ 
 								});
 								});
 							jQuery.getJSON("info.json", function(result){ 
-					 jQuery.each(result, function(key, value){
-								v1=value;
-						   n1="name";
-					 jQuery("#a1").append("<h3 class='widget_title' onclick='fnct(v1,n1)'><span class='tr' id='"+key+"'>"+ value.name+ "</span><input type='button' value='+' class='w3-button w3-xlarge w3-black' id='b1'><input type='button' value='-' class='w3-button w3-xlarge w3-teal' id='b2'></h3> "); 
-					 jQuery.each(value.skills, function(key2, value2) { 
-							jQuery("#a1").append("<div class='widget_inner style_1' onclick='fnct()'><div class='skills_row odd first'><span class='tr' onclick='fnct()'>"+ value2.n+ " </span><input type='button' value='+' class='w3-button w3-xlarge w3-black' id='b11'><input type='button' value='-' class='w3-button w3-xlarge w3-teal' id='b22'><br><span class='progressbar'><span class='progress' style='background-color: rgb(57, 213, 255); width:'+value2.p+';' rel='"+value2.p+"'><span class='value'> "+value2.p+"</span></span></span></div></div><br>");
-							
-						});
-					});
-		 });
-	
-						// jQuery('#b2').click(function(){
-							// jQuery.post(
-								// "index.php",
-								// {
-									// n : "1",
-								// }
-							   // );
-                // });
-				// jQuery('#b11').click(function(){
-					// jQuery('#').after();
-				// });
-				// jQuery('#b22').click(function(){
-					// jQuery('#').after();
-				// });
-            
+					 jQuery.each(result, function(key, val){ 
+					 jQuery("#a1").append("<h3 class='widget_title' onclick='fnct1()'><span class='tr' id='name' >"+ val.name+ "</span><input type='button' value='+' class='w3-button w3-xlarge w3-black' id='b1'><input type='button' value='-' class='w3-button w3-xlarge w3-teal' id='b2'></h3> "); 
+					 jQuery.each(val.skills, function(key2, value2) { 
+							jQuery("#a1").append("<div class='widget_inner style_1' onclick='fnct2()'><div class='skills_row odd first'><span class='tr' onclick='fnct2()' id='skills' >"+ value2.n+ " </span><input type='button' value='+' class='w3-button w3-xlarge w3-black' id='b11'><input type='button' value='-' class='w3-button w3-xlarge w3-teal' id='b22'><br><span class='progressbar'><span class='progress' style='background-color: rgb(57, 213, 255); width:'+value2.p+';' rel='"+value2.p+"'><span class='value'> "+value2.p+"</span></span></span></div></div><br>");
+							});}); });
 			</script>
                                                 <aside id="cv" class="widget widget_skills"><h3 class="widget_title">
 												<span class="td" id="Tk" data-type="text">

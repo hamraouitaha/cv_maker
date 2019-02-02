@@ -5,9 +5,6 @@
 			 ch='<input type="'+type+'" class="tst" />';
 			 if(idc == "T6")
 			ch='<textarea cols="110" rows="4" type="text" class="tst"></textarea>';
-		if(idc=="img"){
-			ch='<input type="file" name="image" size="25" /><input type="submit" name="submit" value="Submit" />';
-		}
 			 //image....
 			c=jQuery(this).text();
 			jQuery(this).replaceWith(ch);
@@ -32,6 +29,14 @@
 }
 		}) ;
 		 });
+jQuery("#img11").click(function(t) {
+jQuery("#but1").css({'display':'block'});
+jQuery("#but2").css({'display':'block'});  });
+ jQuery("#but1").click(function(t) {
+jQuery("#but1").css({'display':'none'});
+jQuery("#but2").css({'display':'none'});
+		   location.reload();
+												});
 		});	
 			
 		
