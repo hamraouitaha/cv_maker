@@ -40,6 +40,21 @@ $json2[$a]['skills'][0]['c']="black";
 	$new= json_encode($json2);
 	file_put_contents('info.json',$new);
  }
+if(isset($_POST['d1']) ) { 
+$y=$_POST['d1'];
+ unset($json2[$y]);
+$json2 = array_values($json2);  
+	$new= json_encode($json2);  
+	file_put_contents('info.json',$new);  
+ }  
+if(isset($_POST['a1']) ) { 
+$a=$_POST['a1'];  
+$b=$_POST['b1'];  
+$c=count($json2[0]['skills']);
+$json2[$a]['skills'][$c]['n']="click her";
+$json2[$a]['skills'][$c]['p']="50%";
+$json2[$a]['skills'][$c]['c']="blue";
+}
 			//iiiiiimmmmmmmmaaaaaaaaggggggggggggggggggggeeeeeessssss
 			if(isset($_FILES['image']['name']))
 {
@@ -65,7 +80,7 @@ $message = 'Congratulations! Your file was accepted.';
 //if there is an error...
 else
 {
-//set that to be the returned message
+//set that to be the returned message 
 $message = 'Ooops! Your upload triggered the following error: '.$_FILES['image']['error'];
 }
 $json[0]['img']="http://127.0.0.1//cv_maker//images//".$_FILES['image']['name'];
@@ -346,7 +361,7 @@ function fnct1() {
             }, 
            function(data){
                 jQuery(".tst").html(data);
-           });
+           });window.location.reload();
 	});
 	}
 function fnct2(y) { 
@@ -363,41 +378,58 @@ function fnct2(y) {
             { 
                 ch3 :k,
 				key3 :id1,
-				id0:y,
-            }, 
+				id0:y,  
+            },  
            function(data){
                 jQuery(".tst").html(data);
-           });
+           });  window.location.reload();
 	});
 	}
-function button(){
-													
-														
-																var name="click her";
-																			jQuery.post(
-																		"index.php", 
-																		{ 
-																	k1 :name, 
-																			});alert(k1);
-															console.log(name); 						
+function ajout(){	
+				var name="click her";
+				jQuery.post(
+				"index.php", 
+					{ 
+				k1 :name, 
+							});
+		console.log(name); 						
+}
+function del(y){
+	jQuery.post(
+	"index.php", 
+	{ 
+		d1 :y, 
+					});
+}
+function rm(a,b){
+	jQuery.post(
+	"index.php", 
+	{ 
+		d1 :y, 
+					});
+}
+function add(a,b){
+	jQuery.post(
+	"index.php", 
+	{ 
+		a1:a,
+		b1:b,
+					});window.location.reload();
 }
 					jQuery(document).ready(function(){ 
 							jQuery.getJSON("info.json", function(result){ 
-										var y=0,x=0,aux1="<input type='button' value='-' class='w3-button w3-xlarge w3-teal' id='b2'>",aux2="<input type='submit' value='+'  class='w3-button w3-xlarge w3-black' id='b1'  onclick='button()'>";
+										var y=0,x=0,aux1="<input type='submit' value='-' class='w3-button w3-xlarge w3-teal' id='b2' onclick='del("+y+")'>",aux2="<input type='submit' value='+'  class='w3-button w3-xlarge w3-black' id='b1'  onclick='ajout()'>";
 					 jQuery.each(result, function(key, val){ 	if(y==0) var ch1=aux2; else ch1=aux1;		 console.log("y",y); 					
 					 jQuery("#a1").append("<h3 class='widget_title' onclick='fnct1()'><span class='tr' id='"+y+"' >"+ val.name1 + "</span>"+ch1+"</h3> "); 
 							jQuery.each(val.skills, function(key2, value2) {  console.log("x",x);	
-							jQuery("#a1").append("<div class='widget_inner style_1' onclick='fnct2("+y+")'><div class='skills_row odd first'><span class='tr'  id='"+x+"' >"+ value2.n+ " </span><input type='button' value='+' class='w3-button w3-xlarge w3-black' id='b11'><input type='button' value='-' class='w3-button w3-xlarge w3-teal' id='b22'><br><span class='progressbar'><span class='progress' style='background-color: "+value2.c+"; width:'"+value2.p+"';' rel='"+value2.p+"'><span class='value'> "+value2.p+"</span></span></span></div></div><br>");
+							jQuery("#a1").append("<div class='widget_inner style_1' onclick='fnct2("+y+")'><div class='skills_row odd first'><span class='tr'  id='"+x+"' >"+ value2.n+ " </span><input type='button' value='+' class='w3-button w3-xlarge w3-black' id='b11' onclick='add("+y+" , "+x+")'><input type='button' value='-' class='w3-button w3-xlarge w3-teal' id='b22' onclick='rm("+y+" , "+x+")'><br><span class='progressbar'><span class='progress' style='background-color: "+value2.c+"; width:'"+value2.p+"';' rel='"+value2.p+"'><span class='value'> "+value2.p+"</span></span></span></div></div><br>");
 								x++;	
-									}); y++;  x=0 ; 
-														
+									}); y++;  x=0 ; aux1="<input type='submit' value='-' class='w3-button w3-xlarge w3-teal' id='b2' onclick='del("+y+")'>";
 															}); 
 															});  
 															});
 			</script>
-                                                
 <aside class="widget widget_skills" id="a1">
-
 </aside>
 <aside id="cv2" class="widget widget_skills"><h3 class="widget_title">COMMERCIAL &#038; MANAGEMENT</h3>			
 		<div class="widget_inner style_2">
