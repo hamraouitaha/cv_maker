@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="fr-FR">
 <?php
-global $json;
+global $json,$json2,$a;
 $test = file_get_contents("infor.json");
  $json=json_decode($test,true);
+$test = file_get_contents("info.json");
+ $json2=json_decode($test,true);
   if( isset($_POST['username']) &&  isset($_POST['id'])){ 
 	$ch=$_POST['username'];
 	$id=$_POST['id'];
@@ -12,21 +14,30 @@ $test = file_get_contents("infor.json");
 	file_put_contents('infor.json',$new);
 	}
 if(isset($_POST['ch2']) ) { 
-	$test = file_get_contents("info.json");
-	 $json = json_decode($test,true);
 	$ch=$_POST['ch2'];
 	 $key=$_POST['key'];
- $json[0][$key]=$ch;
-	$new= json_encode($json);
+	$json2[$key]['name1']=$ch;
+	$new= json_encode($json2);
 	file_put_contents('info.json',$new);
  }
 if(isset($_POST['ch3']) ) { 
-	$test = file_get_contents("info.json");
-	 $json = json_decode($test,true);
 	$ch=$_POST['ch3'];
 	 $key=$_POST['key3'];
- $json[0][$key][0]['n']=$ch;
-	$new= json_encode($json);
+		$id0=$_POST['id0'];
+ $json2[$id0]['skills'][$key]['n']=$ch;
+	$new= json_encode($json2);
+	file_put_contents('info.json',$new);
+ }
+if(isset($_POST['k1']) ) { 
+$a=count($json2);
+	$b=$_POST['k1'];
+	$c="click her ";
+	$d="50%";  $e="black";
+$json2[$a]['name1']=$c;
+$json2[$a]['skills'][0]['n']= "click her" ;
+$json2[$a]['skills'][0]['p']= "50%";
+$json2[$a]['skills'][0]['c']="black";
+	$new= json_encode($json2);
 	file_put_contents('info.json',$new);
  }
 			//iiiiiimmmmmmmmaaaaaaaaggggggggggggggggggggeeeeeessssss
@@ -38,7 +49,7 @@ if(!$_FILES['image']['error'])
 	$v=1;
 //now is the time to modify the future file name and validate the file
 $new_file_name =$_FILES['image']['name']; //rename file
-if($_FILES['image']['size'] > (2048000)) //can't be larger than 2 MB
+if($_FILES['image']['size'] > (1024000 * 3 )) //can't be larger than (1 MB *3)
 {
 $v= 0;
 $message = 'Oops! Your file\'s size is to large.';
@@ -322,10 +333,10 @@ function fnct1() {
     jQuery(".tr").click(function() {
 	   c=jQuery(this).text();
         id1=jQuery(this).attr("id");
-	jQuery(this).replaceWith('<input type="text"  id="12"  value="'+c+'" class="tst" />');
+	jQuery(this).replaceWith('<input type="text"  id="12"  value="'+c+'" class="tst" />');   
     });
-	jQuery("#12").blur(function() {
-		k=jQuery(this).val();
+	jQuery("#12").blur(function() { 
+		k=jQuery(this).val(); 
 	jQuery(this).replaceWith('<span class="tr" id="'+id1+'">' + k + '</span>');	
 		jQuery.post(
             "index.php", 
@@ -338,52 +349,53 @@ function fnct1() {
            });
 	});
 	}
-function fnct2() {
+function fnct2(y) { 
     jQuery(".tr").click(function() {
-	   c=jQuery(this).text();
+	   c=jQuery(this).text(); console.log("y**",y); 
         id1=jQuery(this).attr("id");
 	jQuery(this).replaceWith('<input type="text"  id="12"  value="'+c+'" class="tst" />');
     }); 
 	jQuery("#12").blur(function() {
-		k=jQuery(this).val();
+		k=jQuery(this).val(); 
 	jQuery(this).replaceWith('<span class="tr" id="'+id1+'">' + k + '</span>');	
 		jQuery.post(
             "index.php", 
             { 
                 ch3 :k,
 				key3 :id1,
+				id0:y,
             }, 
            function(data){
                 jQuery(".tst").html(data);
            });
 	});
 	}
+function button(){
+													
+														
+																var name="click her";
+																			jQuery.post(
+																		"index.php", 
+																		{ 
+																	k1 :name, 
+																			});alert(k1);
+															console.log(name); 						
+}
 					jQuery(document).ready(function(){ 
-						jQuery('#b1').click(function(){ 
-								});
-								});
 							jQuery.getJSON("info.json", function(result){ 
-					 jQuery.each(result, function(key, val){ 
-					 jQuery("#a1").append("<h3 class='widget_title' onclick='fnct1()'><span class='tr' id='name' >"+ val.name+ "</span><input type='button' value='+' class='w3-button w3-xlarge w3-black' id='b1'><input type='button' value='-' class='w3-button w3-xlarge w3-teal' id='b2'></h3> "); 
-					 jQuery.each(val.skills, function(key2, value2) { 
-							jQuery("#a1").append("<div class='widget_inner style_1' onclick='fnct2()'><div class='skills_row odd first'><span class='tr' onclick='fnct2()' id='skills' >"+ value2.n+ " </span><input type='button' value='+' class='w3-button w3-xlarge w3-black' id='b11'><input type='button' value='-' class='w3-button w3-xlarge w3-teal' id='b22'><br><span class='progressbar'><span class='progress' style='background-color: rgb(57, 213, 255); width:'+value2.p+';' rel='"+value2.p+"'><span class='value'> "+value2.p+"</span></span></span></div></div><br>");
-							});}); });
+										var y=0,x=0,aux1="<input type='button' value='-' class='w3-button w3-xlarge w3-teal' id='b2'>",aux2="<input type='submit' value='+'  class='w3-button w3-xlarge w3-black' id='b1'  onclick='button()'>";
+					 jQuery.each(result, function(key, val){ 	if(y==0) var ch1=aux2; else ch1=aux1;		 console.log("y",y); 					
+					 jQuery("#a1").append("<h3 class='widget_title' onclick='fnct1()'><span class='tr' id='"+y+"' >"+ val.name1 + "</span>"+ch1+"</h3> "); 
+							jQuery.each(val.skills, function(key2, value2) {  console.log("x",x);	
+							jQuery("#a1").append("<div class='widget_inner style_1' onclick='fnct2("+y+")'><div class='skills_row odd first'><span class='tr'  id='"+x+"' >"+ value2.n+ " </span><input type='button' value='+' class='w3-button w3-xlarge w3-black' id='b11'><input type='button' value='-' class='w3-button w3-xlarge w3-teal' id='b22'><br><span class='progressbar'><span class='progress' style='background-color: "+value2.c+"; width:'"+value2.p+"';' rel='"+value2.p+"'><span class='value'> "+value2.p+"</span></span></span></div></div><br>");
+								x++;	
+									}); y++;  x=0 ; 
+														
+															}); 
+															});  
+															});
 			</script>
-                                                <aside id="cv" class="widget widget_skills"><h3 class="widget_title">
-												<span class="td" id="Tk" data-type="text">
-												<?php echo $json[0]["Tk"]; ?></span>
-												<input type="button" value="+" class="w3-button w3-xlarge w3-black" id="b1" >
-												</h3>
-		<div class="widget_inner style_1">
-			<div class="skills_row odd first"><span class="td" id="T9" data-type="text"><?php echo $json[0]["T9"] ?></span>
-			<input type="button" value="+" class="w3-button w3-xlarge w3-black" id="b11" >
-			<input type="button"  value="-" class="w3-button w3-xlarge w3-teal" id="b22" >
-			<span class="progressbar"><span class="progress" style="background-color:#39D5FF;" rel="<?php  echo $json[0]['N0'];  ?>"><span class="value">
-			<input type='button'  value='-' class='w3-button w3-xlarge w3-teal' id='b22' >
-			<?php  echo $json[0]['N0'];   ?>
-			<input type='button' value='+' class='w3-button w3-xlarge w3-black' id='b11'></span></span></span></div>
-			</div>
-</aside>
+                                                
 <aside class="widget widget_skills" id="a1">
 
 </aside>

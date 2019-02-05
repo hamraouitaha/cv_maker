@@ -1,5 +1,9 @@
 [{
-"name":"name112233",
+"name1":"name112233",
 "skills":
-[{"n":"click her..","p":"50%"}]
-}]
+[{"n":"click her..","p":"50%","c":"red"},{"n":"click her..","p":"50%","c":"red"}]
+},
+{"name1":"name112233",
+"skills":
+[{"n":"click her..","p":"50%","c":"yellow"},{"n":"click her..","p":"50%","c":"yellow"}]}
+]
