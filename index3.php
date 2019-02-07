@@ -306,7 +306,7 @@ echo $i."<br>";
 </form>
                     <div class="wrapper resume_wrapper">
 					<script>
-function fnct(n) {
+function fnct1(n) {
     jQuery(".tr").click(function() {
 	   c=jQuery(this).text();
 	  id1=jQuery(this).attr("id");
@@ -357,17 +357,23 @@ function fnct(n) {
 	
 	}
 	
-	function fnct3(n,l) {
+	function fnct3(n) {
     jQuery(".tr").click(function()   {
 	   c=jQuery(this).text();
 	  id1=jQuery(this).attr("id");
 	  tab=jQuery(this).attr("data");
+	  console.log(tab);
 	  tab2=jQuery(this).attr("data2");
+	  console.log(tab2);
+	 	   
+
+	 
 	jQuery(this).replaceWith('<input type="text"  id="12"value='+c+' class="tst" />');
     });	
 	jQuery("#12").blur(function() {
 		k=jQuery(this).val();
 		jQuery(this).replaceWith('<span class="tr" id='+id1+'>' + k + '</span>');	
+		 
 		jQuery.post(
             "test.php", 
             {
@@ -380,25 +386,138 @@ function fnct(n) {
            function(data){
                 jQuery(".tst").html(data);
            });
+		   
+
+	});
+	}
+	function fnct(n) {
+    jQuery(".tr").click(function()   {
+	   c=jQuery(this).text();
+	  id1=jQuery(this).attr("id");
+	  tab=jQuery(this).attr("data");
+	  console.log(tab);
+	  tab2=jQuery(this).attr("data2");
+	  console.log(tab2);
+	 	   
+
+	 
+	jQuery(this).replaceWith('<input type="text"  id="12"value='+c+' class="tst" />');
+    });	
+	jQuery("#12").blur(function() {
+		k=jQuery(this).val();
+		jQuery(this).replaceWith('<span class="tr" id='+id1+'>' + k + '</span>');	
+		 
+		jQuery.post(
+            "test.php", 
+            {
+                nom2 : jQuery(this).val(),
+				key:id1,
+				key1:tab,
+				key2:tab2,
+				name:n,
+            },
+           function(data){
+                jQuery(".tst").html(data);
+           });
+		   
+
 	});
 	}
 
 function fnctli (e,a,b)
 { ch=".p_"+a+"_"+b;
 
-console.log(e);
+
 	jQuery(ch).append("<div class='post_body resume_post_body' onclick='fnct3(n3,l+1)' ><li class='tr'id="+e+" data="+b+" data2="+a+" >tapez un autre ligne </li></div>");
 	
 }
-function fnctbloc2 (a,b,c,d)
-{; 
+
+function fnctmoinli (i,j)
+{id1=jQuery(".m").attr("id");
+console.log(id1);
+ch="moins";
+jQuery.post(
+            "test.php", 
+            {
+               // nom2 : jQuery(this).val(),
+				moin:ch,
+				key:id1,
+				key1:i,
+				key2:j,
+				
+            },
+           function(data){
+                jQuery(".tst").html(data);
+           });	
+}
+
+
+function fnctmoinbloc1 (key)
+{id1=jQuery(".m1").attr("id");
+console.log(id1);
+ch="moins";
+jQuery.post(
+            "test.php", 
+            {
+               // nom2 : jQuery(this).val(),
+				moin1:ch,
+				key:id1,
+				key1:key,
+			
+				
+            },
+           function(data){
+                jQuery(".tst").html(data);
+           });	
+}
+
+function fnctmoinbloc2 (key)
+{
+id1=jQuery(".m2").attr("id");
+ch="moins";
+jQuery.post(
+            "test.php", 
+            {
+              moin3:ch,
+				
+				key:id1,
+			
+			
+				
+            },
+           function(data){
+                jQuery(".tst").html(data);
+           });	
+}
+
+
+
+function fnctbloc2 (a,b,c,d,e)
+{ch2= ".d_"+a+"_"+b;
 ch=".e_"+d ;
-console.log(ch);
-jQuery(ch).append("<div class='post_header resume_post_header' onclick=fnct2(n2)><div class='resume_period'><input type='button' value='+' id='B1' onclick='fnctbloc2("+b+")' style='background-color: #666666; float:right'><span class='tr'>la date de : </span><span class='tr'>- la date jusqu'a :</span><input type='button' value='-' style='background-color: #808080; float:right'></div><h4 class='post_title'><span class='post_title_icon' style='background-color: #3eb337'></span><span id="+a+" data="+c+" class='tr'>nom du societe</h4><h5 class='post_subtitle'></h5></div>");
 
- jQuery(ch).append("<div class='post_body resume_post_body' onclick='fnct2(n4)'><span class='tr' id="+a+" data="+c+">tapez le role </div><p>Ma mission était de :</p>");
 
-	//jQuery(ch).append("<div class='post_body resume_post_body' onclick='fnct3(n3,l+1)' ><li class='tr'id="+e+" data="+b+" data2="+a+" >tapez un autre ligne </li></div>");
+a=a+2;
+jQuery(ch2).append("<div class='post_header resume_post_header' onclick=fnct2(n2)><div class='resume_period'><input type='button' value='+' id='B1' onclick='fnctbloc2("+b+")' style='background-color: #666666; float:right'><span class='tr'>la date de : </span><span class='tr'>- la date jusqu'a :</span><input type='button' value='-' style='background-color: #808080; float:right'></div><h4 class='post_title'><span class='post_title_icon' style='background-color: #3eb337'></span><span id="+a+" data="+c+" class='tr'>nom du societe</h4><h5 class='post_subtitle'></h5></div>");
+ jQuery(ch2).append("<div class='post_body resume_post_body' onclick='fnct2(n4)'><span class='tr' id="+a+" data="+c+">tapez le role </div><p>Ma mission était de :</p>");
+
+jQuery(ch2).append("<div class='post_body resume_post_body' onclick='fnct3(n3)' ><li class='tr'id="+0+" data="+c+" data2="+a+" onclick='fnct3(n3)'   >tapez un ligne </li></div>");
+	
+}
+
+
+
+
+function fnctbloc1 (lo)
+{//ch2= ".d_"+a+"_"+b;
+//ch=".e_"+d ;
+
+ jQuery("#ici").append("<div class='category_header resume_category_header' onclick='fnct1(n1)' ><h3 class='category_title' style='background: #373737'><span class='category_title_icon' style='background-color:#3eb337'></span><span class='tr' id="+lo+">tapez le nom de cet article <input type='button' value='+'id='B1' onclick='fnctbloc1()' style='background-color: #666666; float:right'><input type='button' value='-' style='background-color: #808080; float:right'></span></h3></div>");
+
+jQuery("#ici").append("<div class='post_header resume_post_header' onclick='fnct2(n2)'><div class='resume_period'><input type='button' value='+' id='B1' onclick='fnctbloc2()' style='background-color: #666666; float:right'><span class='tr'>la date de : </span><span class='tr'>- la date jusqu'a :</span><input type='button' value='-' style='background-color: #808080; float:right'></div><h4 class='post_title'><span class='post_title_icon' style='background-color: #3eb337'></span><span id="+0+" data="+lo+" class='tr' onclick='fnct2(n2)' >nom du societe</h4><h5 class='post_subtitle'></h5></div>");
+ jQuery("#ici").append("<div class='post_body resume_post_body' onclick='fnct2(n4)'><span class='tr' id="+0+" data="+lo+">tapez le role </div><p>Ma mission était de :</p>");
+
+jQuery("#ici").append("<div class='post_body resume_post_body' onclick='fnct3(n3)' ><li class='tr'id="+0+" data="+lo+" data2="+0+" onclick='fnct3(n3)'   >tapez un ligne </li></div>");
 	
 }
 
@@ -412,6 +531,8 @@ jQuery(ch).append("<div class='post_header resume_post_header' onclick=fnct2(n2)
 			i=-1;
 			
 	             jQuery.each(result, function(key, value) {
+					 lo=jQuery(result).size();
+					 console.log(lo);
 					 var className3 = ".e_"+key ;
 								 if(t!=0)
 								jQuery(className3).append("</div>");
@@ -419,7 +540,7 @@ jQuery(ch).append("<div class='post_header resume_post_header' onclick=fnct2(n2)
 
 						   n1="name1";
 						   var c = key;
-	                       jQuery(className3).append("<div class='category_header resume_category_header' onclick='fnct(n1)' ><h3 class='category_title' style='background: #373737'><span class='category_title_icon' style='background-color:#3eb337'></span><span class='tr' id="+key+">"+ value.name1+"<input type='button' value='+'id='B1' style='background-color: #666666; float:right'><input type='button' value='-' style='background-color: #808080; float:right'></span></h3></div>");
+	                       jQuery(className3).append("<div class='category_header resume_category_header' onclick='fnct1(n1)' ><h3 class='category_title' style='background: #373737'><span class='category_title_icon' style='background-color:#3eb337'></span><span class='tr' id="+key+">"+ value.name1+"<input type='button' value='+'id='B1' onclick='fnctbloc1(lo)' style='background-color: #666666; float:right'><div class='m2' id="+key+" ><input type='button' value='-' onclick='fnctmoinbloc2()'style='background-color: #808080; float:right'></div></span></h3></div>");
 	                       i=i+1;
 						   j=-1;
 						   var t=0;
@@ -432,18 +553,19 @@ jQuery(ch).append("<div class='post_header resume_post_header' onclick=fnct2(n2)
 
 											n2="name";
 											 n4="role";
+											 n6="date1";
+											j=j+1;	
+
 											 var className = ".p_"+key2+"_"+c;
 											 
 											 if(t!=0)
 										jQuery(className).append("</ul>");
 									     jQuery(className3).append("<div  class='d_"+key2+"_"+c+"'>");
 
-                                           jQuery(className2).append("<div class='post_header resume_post_header' onclick=fnct2(n2)><div class='resume_period'><span class='tr'>"+value2.date1+"</span><span class='tr'>-"+value2.date2+"</span></div><h4 class='post_title'><span class='post_title_icon' style='background-color: #3eb337'></span><span id="+key2+" data="+i+" class='tr'>"+ value2.name+"</h4><h5 class='post_subtitle'></h5></div>");
+                                           jQuery(className2).append("<div class='post_header resume_post_header' ><div class='resume_period'><span class='tr' onclick=fnct2(n6)>"+value2.date1+"</span><span class='tr'>-"+value2.date2+"</span></div><h4 class='post_title'><span class='post_title_icon' style='background-color: #3eb337'></span><span id="+key2+" data="+i+" class='tr'>"+ value2.name+"</h4><h5 class='post_subtitle'></h5></div>");
 											 jQuery(className2).append("<div class='post_body resume_post_body' onclick='fnct2(n4)'><span class='tr' id="+key2+" data="+i+">"+ value2.role+"</div><p>Ma mission était de :</p>");
-											
+
 											jQuery(className2).append("<ul  class='p_"+key2+"_"+c+"'>");
-											jQuery(className2).before("<input type='button' value='+' id='B2' onclick='fnctbloc2("+key2+","+c+","+i+","+key+")' style='background-color: #666666; float:right'>");
-											j=j+1;	
                                             taille=jQuery(value2.article).size();
 											
 	   	            jQuery.each(value2.article, function(key3, value3) {
@@ -451,7 +573,8 @@ jQuery(ch).append("<div class='post_header resume_post_header' onclick=fnct2(n2)
 						                                            console.log( taille=jQuery(value2.article).size());
 
 						                     n3="article";
-                                            jQuery(className).append("<div class='post_body resume_post_body' onclick='fnct3(n3,l)'><li class='tr' id="+key3+" data="+i+" data2="+j+">"+ value3+"</div>");
+                                            jQuery(className).append("<div class='m' id="+key3+"><input type='button' value='-' style='background-color: #808080;  float:right'  onclick='fnctmoinli("+i+","+j+")'><li class='tr' id="+key3+" data="+i+" data2="+j+">"+ value3+" </div>");
+							             // jQuery(className).after("<div ><input type='button' value='-' style='background-color: #808080; float:right' onclick='fnctmoinli()' ></div>");
 
 														l=key3;
                                                        //  console.log(l);
@@ -460,9 +583,11 @@ jQuery(ch).append("<div class='post_header resume_post_header' onclick=fnct2(n2)
 							 
 							
 							              jQuery(className).before("<div ><input type='button' value='+' id='B1'   onclick='fnctli("+taille+","+key2+","+c+")' style='background-color: #666666; float:right'></div>");
+									   		jQuery(className2).before("<input type='button' value='+' id='B2' onclick='fnctbloc2("+key2+","+c+","+i+","+key+","+key2+")' style='background-color: #666666; float:right'><div class='m1' id="+key2+" ><input type='button' value='-'  onclick='fnctmoinbloc1("+key+")' style='background-color: #808080; float:right'></div>");
 
 			                                                           	 //jQuery("#ici").append("<br>");
 		                               });
+
 	});
 	});
    
