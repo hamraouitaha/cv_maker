@@ -37,7 +37,6 @@ jQuery("#but1").css({'display':'none'});
 jQuery("#but2").css({'display':'none'});
 		   location.reload();
 												});
-
 		});	
 			
 		
