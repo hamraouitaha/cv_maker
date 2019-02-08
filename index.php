@@ -2,33 +2,48 @@
 <html lang="fr-FR">
 <?php
 global $json,$json2,$a;
-$test = file_get_contents("infor.json");
- $json=json_decode($test,true);
 $test = file_get_contents("info.json");
  $json2=json_decode($test,true);
+$test = file_get_contents("infor.json");
+ $json=json_decode($test,true);
   if( isset($_POST['username']) &&  isset($_POST['id'])){ 
 	$ch=$_POST['username'];
 	$id=$_POST['id'];
-    $json[0][$id]=$ch;
+    $json[0][$id]=strip_tags($ch);
+$json2=array_values($json2);
 			$new= json_encode($json);
-	file_put_contents('infor.json',$new);
+			file_put_contents('infor.json',$new);
 	}
-if(isset($_POST['ch2']) ) { 
+if(isset($_POST['ch2']) && isset($_POST['key']) ) { 
+
 	$ch=$_POST['ch2'];
-	 $key=$_POST['key'];
-	$json2[$key]['name1']=$ch;
+     $ch=strip_tags($ch);
+$champ1="name1";
+	 $key=$_POST["key"];
+	$json2[$key][$champ1]=$ch; 
+echo $ch."value and, keeyy -->  ".$key; 
+$json2=array_values($json2);
 	$new= json_encode($json2);
 	file_put_contents('info.json',$new);
- }
-if(isset($_POST['ch3']) ) { 
-	$ch=$_POST['ch3'];
+ }  
+if(isset($_POST['ch3']) && isset($_POST['key3']) && isset($_POST['id0'])  &&  isset($_POST['color'])) { 
+
+	     $ch=$_POST['ch3']; 
 	 $key=$_POST['key3'];
 		$id0=$_POST['id0'];
+		$co=$_POST['color'];
+$ch=strip_tags($ch);
  $json2[$id0]['skills'][$key]['n']=$ch;
+ $json2[$id0]['skills'][$key]['c']=$co;
+
+echo $ch." value and key petit tab  ".$key." id grand tab  ".$id0;
+$json2=array_values($json2);
 	$new= json_encode($json2);
 	file_put_contents('info.json',$new);
  }
 if(isset($_POST['k1']) ) { 
+$test = file_get_contents("info.json");
+ $json2=json_decode($test,true);
 $a=count($json2);
 	$b=$_POST['k1'];
 	$c="click her ";
@@ -37,23 +52,77 @@ $json2[$a]['name1']=$c;
 $json2[$a]['skills'][0]['n']= "click her" ;
 $json2[$a]['skills'][0]['p']= "50%";
 $json2[$a]['skills'][0]['c']="black";
+$json2=array_values($json2);
 	$new= json_encode($json2);
 	file_put_contents('info.json',$new);
  }
 if(isset($_POST['d1']) ) { 
+$test = file_get_contents("info.json");
+ $json2=json_decode($test,true);
 $y=$_POST['d1'];
  unset($json2[$y]);
 $json2 = array_values($json2);  
+$json2=array_values($json2);
 	$new= json_encode($json2);  
 	file_put_contents('info.json',$new);  
  }  
 if(isset($_POST['a1']) ) { 
+$test = file_get_contents("info.json");
+ $json2=json_decode($test,true);
 $a=$_POST['a1'];  
 $b=$_POST['b1'];  
-$c=count($json2[0]['skills']);
+$c=count($json2[$a]['skills']);
 $json2[$a]['skills'][$c]['n']="click her";
 $json2[$a]['skills'][$c]['p']="50%";
 $json2[$a]['skills'][$c]['c']="blue";
+$json2=array_values($json2);
+$new= json_encode($json2);  
+file_put_contents('info.json',$new);  
+}
+if(isset($_POST['p1']) && isset($_POST['p1'])) { 
+$test = file_get_contents("info.json");
+ $json2=json_decode($test,true);
+$a=$_POST['p1']; 
+$b=$_POST['p2']; 
+unset($json2[$a]['skills'][$b]);
+echo $json2[$a]['skills'][$b];
+$json2=array_values($json2);
+$new=json_encode($json2);
+file_put_contents('info.json',$new);
+}
+if(isset($_POST['co1']) && isset($_POST['co2']) && isset($_POST['color'])  ) { 
+$a=$_POST['co1'];
+$b=$_POST['co2'];
+$c=$_POST['color'];
+$test = file_get_contents("language.json");
+ $json3=json_decode($test,true);
+$json3[$b]['a1']= $a ;
+$json3[$b]['c1']= $c ;
+$json3=array_values($json3);
+$new=json_encode($json3);
+file_put_contents('language.json',$new);
+}
+if(isset($_POST['w1']) ) { 
+$test = file_get_contents("language.json");
+ $json3=json_decode($test,true);
+$b=count($json3);
+$a=$_POST['w1'];
+echo $a."*************";
+$json3[$b]['a1']= $a ;
+$json3[$b]['c1']="blue";
+$json3[$b]['p1']="80%";
+$json3=array_values($json3);
+$new=json_encode($json3);
+file_put_contents('language.json',$new);
+}
+if(isset($_POST['w2']) ) { 
+$test = file_get_contents("language.json");
+ $json3=json_decode($test,true);
+$d=$_POST['w2'];
+unset($json3[$d]);
+$json3=array_values($json3);
+$new=json_encode($json3);
+file_put_contents('language.json',$new);
 }
 			//iiiiiimmmmmmmmaaaaaaaaggggggggggggggggggggeeeeeessssss
 			if(isset($_FILES['image']['name']))
@@ -88,6 +157,96 @@ $json[0]['img']="http://127.0.0.1//cv_maker//images//".$_FILES['image']['name'];
 $new= json_encode($json);
 	file_put_contents('infor.json',$new);
 }
+//*******************************************************************************************************************************************************************************************************************
+ if( isset($_POST['nom']) ) {
+	 
+	$test = file_get_contents("inforjson.json");
+$json = json_decode($test,true);
+	$ch=$_POST['nom'];
+	$key=$_POST['key'];
+	$champ=$_POST['name'];
+	 
+ $json[$key]{$champ}=$ch;
+	$new= json_encode($json);
+	file_put_contents('inforjson.json',$new);
+ }
+ if( isset($_POST['nom1']) ) {
+	$test = file_get_contents("inforjson.json");
+$json = json_decode($test,true);
+	$ch=$_POST['nom1'];
+	$key=$_POST['key'];
+	$key1=$_POST['key1'];
+	$name=$_POST['name'];
+	$champ="valeure";
+	echo $key1;
+	echo $champ;
+	echo $key;
+	echo $name;
+	echo $ch;
+	$json[$key1][$champ][$key][$name]=$ch;
+	$new= json_encode($json);
+	file_put_contents('inforjson.json',$new);
+ }
+ if( isset($_POST['nom2']) ) {
+	$test = file_get_contents("inforjson.json");
+$json = json_decode($test,true);      
+	$ch=$_POST['nom2'];
+	$key=$_POST['key'];
+	$key1=$_POST['key1'];
+	$key2=$_POST['key2'];
+	$name=$_POST['name'];
+	$champ="valeure";
+	echo $key1;
+	echo $champ;
+	echo $key2;
+	echo $name;
+	echo $key;
+	$json[$key1][$champ][$key2][$name][$key]=$ch;
+	$new= json_encode($json);
+	file_put_contents('inforjson.json',$new);
+ }
+ if( isset($_POST['moin']) ) { 
+	$test = file_get_contents("inforjson.json");
+$json = json_decode($test,true);
+	$key=$_POST['key'];
+	$key1=$_POST['key1'];
+	$key2=$_POST['key2'];
+	$champ="valeure";
+	$name="article";
+	echo $key1;
+	echo $key2;
+	echo $key;
+	unset($json[$key1][$champ][$key2][$name][$key]);
+	$new= json_encode($json);
+	file_put_contents('inforjson.json',$new);
+ }
+  if( isset($_POST['moin1']) ) {
+	$test = file_get_contents("inforjson.json");
+$json = json_decode($test,true);
+	//$ch=$_POST['nom1'];
+	$key=$_POST['key'];
+	$key1=$_POST['key1'];
+	//$name=$_POST['name'];
+	$champ="valeure";
+	echo $key1;
+	echo $champ;
+	echo $key;
+	//echo $name;
+	//echo $ch;
+	unset($json[$key1][$champ][$key]);
+	$new= json_encode($json);
+	file_put_contents('inforjson.json',$new);
+ } 
+ if( isset($_POST['moin3']) ) {
+	$test = file_get_contents("inforjson.json");
+$json = json_decode($test,true);
+	$key=$_POST['key'];
+	echo $key ;
+	unset($json[$key]);
+	$json= array_values($json);
+	$new= json_encode($json);
+	file_put_contents('inforjson.json',$new);
+ }
 		 ?>
 <head>
 		<meta charset="UTF-8" />
@@ -344,15 +503,16 @@ img.emoji {
                 <div class="section_body resume_section_body">
                     <div class="sidebar resume_sidebar">
 					<script>
-function fnct1() {
+function fnct11() { 
+jQuery(document).ready(function(){ 
     jQuery(".tr").click(function() {
 	   c=jQuery(this).text();
-        id1=jQuery(this).attr("id");
+        id1=jQuery(this).attr("data1");console.log(id1,"id   gran block ");
 	jQuery(this).replaceWith('<input type="text"  id="12"  value="'+c+'" class="tst" />');   
-    });
+    }); 
 	jQuery("#12").blur(function() { 
 		k=jQuery(this).val(); 
-	jQuery(this).replaceWith('<span class="tr" id="'+id1+'">' + k + '</span>');	
+	jQuery(this).replaceWith('<span class="tr" data1="'+id1+'">' + k + '</span>');	
 		jQuery.post(
             "index.php", 
             { 
@@ -361,539 +521,446 @@ function fnct1() {
             }, 
            function(data){
                 jQuery(".tst").html(data);
-           });window.location.reload();
-	});
+           }); window.location.reload();
+	}); });
 	}
-function fnct2(y) { 
-    jQuery(".tr").click(function() {
-	   c=jQuery(this).text(); console.log("y**",y); 
-        id1=jQuery(this).attr("id");
-	jQuery(this).replaceWith('<input type="text"  id="12"  value="'+c+'" class="tst" />');
+function fnct22(y) { 
+jQuery(document).ready(function(){ 
+    jQuery(".tr1").click(function() {
+	   c=jQuery(this).text();  
+        id1=jQuery(this).attr("data2");console.log(id1,"id and indice y tableau  le petit block ",y); 
+			 co=jQuery(this).attr("data3");
+	jQuery(this).replaceWith('<input type="text"  id="12"  value="'+c+'" class="tst" /> <input type="color" id="color1" value="'+co+'">');
     }); 
 	jQuery("#12").blur(function() {
 		k=jQuery(this).val(); 
-	jQuery(this).replaceWith('<span class="tr" id="'+id1+'">' + k + '</span>');	
+		co=jQuery("#color1").val(); 
+	jQuery(this).replaceWith('<span class="tr" data2="'+id1+'">' + k + '</span>');	
 		jQuery.post(
             "index.php", 
             { 
                 ch3 :k,
 				key3 :id1,
-				id0:y,  
+				id0:y, 
+				color:co,
             },  
            function(data){
                 jQuery(".tst").html(data);
            });  window.location.reload();
-	});
+	}); });
 	}
 function ajout(){	
+jQuery(document).ready(function(){ 
 				var name="click her";
 				jQuery.post(
 				"index.php", 
 					{ 
 				k1 :name, 
 							});
-		console.log(name); 						
+		console.log(name); 			
+});			
 }
 function del(y){
+jQuery(document).ready(function(){ 
 	jQuery.post(
 	"index.php", 
 	{ 
 		d1 :y, 
-					});
+					}); });
 }
 function rm(a,b){
+jQuery(document).ready(function(){ 
 	jQuery.post(
 	"index.php", 
 	{ 
-		d1 :y, 
-					});
+		p1:a,
+		p2:b,
+					}); });
 }
 function add(a,b){
+jQuery(document).ready(function(){ 
 	jQuery.post(
 	"index.php", 
 	{ 
 		a1:a,
 		b1:b,
-					});window.location.reload();
+					});});
 }
-					jQuery(document).ready(function(){ 
+			jQuery(document).ready(function(){ 
 							jQuery.getJSON("info.json", function(result){ 
 										var y=0,x=0,aux1="<input type='submit' value='-' class='w3-button w3-xlarge w3-teal' id='b2' onclick='del("+y+")'>",aux2="<input type='submit' value='+'  class='w3-button w3-xlarge w3-black' id='b1'  onclick='ajout()'>";
 					 jQuery.each(result, function(key, val){ 	if(y==0) var ch1=aux2; else ch1=aux1;		 console.log("y",y); 					
-					 jQuery("#a1").append("<h3 class='widget_title' onclick='fnct1()'><span class='tr' id='"+y+"' >"+ val.name1 + "</span>"+ch1+"</h3> "); 
+					 jQuery("#a1").append("<div onclick='fnct11()' ><h3 class='widget_title'  ><span class='tr' data1='"+y+"' >"+ val.name1 + "</span>"+ch1+"</h3> </div>"); 
 							jQuery.each(val.skills, function(key2, value2) {  console.log("x",x);	
-							jQuery("#a1").append("<div class='widget_inner style_1' onclick='fnct2("+y+")'><div class='skills_row odd first'><span class='tr'  id='"+x+"' >"+ value2.n+ " </span><input type='button' value='+' class='w3-button w3-xlarge w3-black' id='b11' onclick='add("+y+" , "+x+")'><input type='button' value='-' class='w3-button w3-xlarge w3-teal' id='b22' onclick='rm("+y+" , "+x+")'><br><span class='progressbar'><span class='progress' style='background-color: "+value2.c+"; width:'"+value2.p+"';' rel='"+value2.p+"'><span class='value'> "+value2.p+"</span></span></span></div></div><br>");
+							jQuery("#a1").append("<div class='widget_inner style_1' onclick='fnct22("+y+")'><div class='skills_row odd first' ><span class='tr1' data3="+value2.c+"  data2='"+x+"' >"+ value2.n+ " </span><input type='submit' value='+' class='w3-button w3-xlarge w3-black' id='b11' onclick='add("+y+","+x+")'><input type='submit' value='-' class='w3-button w3-xlarge w3-teal' id='b22' onclick='rm("+y+","+x+")'><br><span class='progressbar'><span class='progress' style='background-color: "+value2.c+"; width:'"+value2.p+"';' rel='"+value2.p+"'><span class='value'> "+value2.p+"</span></span></span></div></div><br>");
 								x++;	
 									}); y++;  x=0 ; aux1="<input type='submit' value='-' class='w3-button w3-xlarge w3-teal' id='b2' onclick='del("+y+")'>";
 															}); 
 															});  
-															});
+															});  
 			</script>
 <aside class="widget widget_skills" id="a1">
+
 </aside>
 <aside id="cv2" class="widget widget_skills"><h3 class="widget_title">COMMERCIAL &#038; MANAGEMENT</h3>			
 		<div class="widget_inner style_2">
 			<div class="skills_row odd first"><span class="legend" style="background-color:#0057A0;"></span><span class="caption">CIEL SAGE</span></div><div class="skills_row even"><span class="legend" style="background-color:#39D5FF;"></span><span class="caption">ZOHO</span></div><div class="skills_row odd"><span class="legend" style="background-color:#5EFAF7;"></span><span class="caption">ODOO</span></div><div class="skills_row even"><span class="legend" style="background-color:#39D5FF;"></span><span class="caption">MANTIS</span></div><div class="skills_row odd"><span class="legend" style="background-color:#009C41;"></span><span class="caption">AGILE SCRUM</span></div><div class="svg"><svg class="piechart" xmlns="http://www.w3.org/2000/svg"><path d="M66,66  L130,66  A64,64 0 0,1 73,130 z" fill="#0057A0"></path><path d="M66,66  L73,130  A64,64 0 0,1 6,89 z" fill="#39D5FF"></path><path d="M66,66  L6,89  A64,64 0 0,1 22,20 z" fill="#5EFAF7"></path><path d="M66,66  L22,20  A64,64 0 0,1 99,11 z" fill="#39D5FF"></path><path d="M66,66  L99,11  A64,64 0 0,1 130,66 z" fill="#009C41"></path><circle cx="66" cy="66" r="40" fill="#ffffff"></circle></svg></div>		</div>
 </aside><aside id="cvv" class="widget widget_skills"><h2 class="widget_title">LANGUES
-<input type="button" value="+" class="w3-button w3-xlarge w3-black" onclick="alert('le button marche ')" >
-			<input type="button"  value="-" class="w3-button w3-xlarge w3-teal">		
+		<input type='submit' value='+'  class='w3-button w3-xlarge w3-black' id='c1' onclick="chang2()">
 </h2>	
-		<div class="widget_inner style_3">
-			<div class="skills_row odd first"><span class="caption">Arabe</span><span class="progressbar"><span class="progress" style="background-color:#1297E0;" rel="100%"></span></span></div><div class="skills_row even"><span class="caption">Français</span><span class="progressbar"><span class="progress" style="background-color:#F5AB35;" rel="60%"></span></span></div><div class="skills_row odd"><span class="caption">Anglais</span><span class="progressbar"><span class="progress" style="background-color:#2ECC71;" rel="80%"></span></span></div>		</div>
+<div id="ici2" class="widget_inner style_3">
+<script>
+function chang1(){
+jQuery(document).ready(function(){ 
+    jQuery(".caption").click(function() {
+	   c=jQuery(this).text();  
+        id1=jQuery(this).attr("data2");
+	jQuery(this).replaceWith('<input type="text"  id="color1"  value="'+c+'" class="tst" /> <input type="color" id="color2" >'); console.log(id1,"the key ");
+    }); 
+	jQuery("#color1").blur(function() {
+		k=jQuery(this).val(); 
+		co=jQuery("#color2").val(); 
+	jQuery(this).replaceWith('<span class="caption" data2="'+id1+'">' + k + '</span>');	
+		jQuery.post(
+            "index.php", 
+            { 
+               co1 :k,
+				co2:id1,
+				color:co,
+            },  
+           function(data){
+                jQuery(".tst").html(data);
+           }); location.reload(); 
+	}); });
+}
+function chang2(){
+jQuery(document).ready(function(){ 
+	jQuery.post(
+	"index.php", 
+	{ 
+		w1 :"click her", 
+					}); });
+}
+function del2(w){
+jQuery(document).ready(function(){ 
+	jQuery.post(
+	"index.php", 
+	{ 
+		w2 :w, 
+					}); });
+}
+jQuery(document).ready(function(){
+jQuery.getJSON("language.json",function(result){ 
+jQuery.each(result,function(k,v){ 
+jQuery("#ici2").append('<input type="submit" value="-" class="w3-button w3-xlarge w3-teal" id="c2" onclick="del2('+k+')" > <div class="skills_row odd first" onclick="chang1()"><span data2="'+k+'" class="caption" >'+v.a1+'</span><span class="progressbar"><span class="progress" style="background-color:'+v.c1+';" rel="'+v.p1+'"></span></span></div>');
+});
+});
+});
+</script>
+</div>
+
 </aside>                    </div>
 </form>
-                    <div class="wrapper resume_wrapper">
-                                                <div class="category resume_category resume_category_1 first even">
-                            <div class="category_header resume_category_header">
-                                <h3 class="category_title" style="background: #373737"><span class="category_title_icon" style="background-color:#3eb337"></span>EXPÉRIENCES PROFESSIONNELLES</h3>
-                            </div>
-                            <div class="category_body resume_category_body">
-                                                            <article class="post resume_post resume_post_1 first even">
-                                    <div class="post_header resume_post_header">
-                                                                                       
-                                        <div class="resume_period">
-											                                            <span class="period_from">07.2017 - </span>
-                                            											
-                                            <span class="period_to period_present">present</span>
-                                        </div>
-                                                                                <h4 class="post_title"><span class="post_title_icon" style="background-color: #3eb337"></span>Mind Engineering, Le Bardo                                            </h4>
-                                        <h5 class="post_subtitle">Administrateur Système, Webdesigner</h5>
-                                    </div>
-                                    <div class="post_body resume_post_body">
-                                        <p>Ma mission était de :</p>
-<ul>
-<li>Mise en place de l&rsquo;infrastructure système (matériel et réseau)</li>
-<li>Recherche de pannes et maintenance</li>
-<li>Propositions en termes d&rsquo;évolution de la solution informatique</li>
-<li>Webdesign CMS</li>
-<li>Conception et mise en place d’une plateforme de service de stockage et partage de fichiers et d’application diverses en ligne à base de NextCloud.</li>
-<li>Intégration de solution de facturation et gestion des services d’hébergement web basé sur WHMCS.</li>
-<li>Conception Dimensionnement et mise en place d’une plateforme cloud a haute disponibilité (Lamp, Bind, Dovecot, Postfix, Procmail, ProFTPD, SpamAssassin, SSH, Weblizer, Git Repositories, Linuw Firewall, Fail2ban) sur un serveurs Dell XeonR E5 de 8 HDD</li>
-<li>Analyse, conception, développement et automatisation d’enregistrement des noms de domaines (API, ResselerClub API)</li>
-<li>Mise en place du cluster DNS Bind</li>
-<li>Conception et mise en place de la platforme d’hébergement mutilisé (CloudLinux Virtualmin)</li>
-<li>Monitoring des services et des serveurs</li>
-<li>Automatisation de la gestion de sauvegarde avec Webmin</li>
-</ul>
-                                    </div>
-                                </article>
-                                                                <article class="post resume_post resume_post_2 odd">
-                                    <div class="post_header resume_post_header">
-                                                                                       
-                                        <div class="resume_period">
-											                                            <span class="period_from">06.2015 - </span>
-                                            											
-                                            <span class="period_to">06.2017</span>
-                                        </div>
-                                                                                <h4 class="post_title"><span class="post_title_icon" style="background-color: #3eb337"></span>iLi-Studios, Manouba                                            </h4>
-                                        <h5 class="post_subtitle">Gérant, Fondateur</h5>
-                                    </div>
-                                    <div class="post_body resume_post_body">
-                                        <p>Ma mission était de :</p>
-<ul>
-<li>Définir les orientations stratégiques de l&rsquo;entreprise</li>
-<li>Planifier une opération financière</li>
-<li>Gérer le budget de l&rsquo;entreprise</li>
-<li>Analyser les données d&rsquo;activité de la structure, du service et identifier des axes d&rsquo;évolution</li>
-<li>Définir des objectifs de rentabilité économique</li>
-<li>Mettre en place une politique de partenariat avec les facultés</li>
-<li>Mener des actions commerciales</li>
-</ul>
-                                    </div>
-                                </article>
-                                                                <article class="post resume_post resume_post_3 even">
-                                    <div class="post_header resume_post_header">
-                                                                                       
-                                        <div class="resume_period">
-											                                            <span class="period_from">06.2012 - </span>
-                                            											
-                                            <span class="period_to">06.2015</span>
-                                        </div>
-                                                                                <h4 class="post_title"><span class="post_title_icon" style="background-color: #3eb337"></span>Société Sakly Equipement Général, Kef, Tunis                                            </h4>
-                                        <h5 class="post_subtitle">Responsable Commercial</h5>
-                                    </div>
-                                    <div class="post_body resume_post_body">
-                                        <header></header>
-<div class="meta"></div>
-<p class="description" data-section="pastPositions">Ma mission était de :</p>
-<ul>
-<li class="description" data-section="pastPositions">Diriger et accompagner l’équipe commercial</li>
-<li class="description" data-section="pastPositions">Etre attentif aux évolutions du marché et aux offres de la concurrence afin d’adapter en permanence les offres de l’entreprise</li>
-<li class="description" data-section="pastPositions">Participer à la négociation sur certains comptes stratégiques</li>
-<li class="description" data-section="pastPositions">Reporter à la direction</li>
-</ul>
-                                    </div>
-                                </article>
-                                                                <article class="post resume_post resume_post_4 odd">
-                                    <div class="post_header resume_post_header">
-                                                                                       
-                                        <div class="resume_period">
-											                                            <span class="period_from">06.2009 - </span>
-                                            											
-                                            <span class="period_to">06.2012</span>
-                                        </div>
-                                                                                <h4 class="post_title"><span class="post_title_icon" style="background-color: #3eb337"></span>Ateliers Mécanique du Sahel, Sousse                                            </h4>
-                                        <h5 class="post_subtitle">Représentant Commercial</h5>
-                                    </div>
-                                    <div class="post_body resume_post_body">
-                                        <header></header>
-<p>Ma mission était de :</p>
-<ul>
-<li>Représenter la marque auprès de ces clients</li>
-<li>Soutenir le développement de ses clients</li>
-<li>Optimiser les ventes</li>
-</ul>
-                                    </div>
-                                </article>
-                                                            </div> <!-- .category_body -->
-                        </div> <!-- .category -->
-                                                <div class="category resume_category resume_category_2 odd">
-                            <div class="category_header resume_category_header">
-                                <h3 class="category_title" style="background: #373737"><span class="category_title_icon" style="background-color:#3498db"></span>FORMATIONS</h3>
-                            </div>
-                            <div class="category_body resume_category_body">
-                                                            <article class="post resume_post resume_post_1 first even">
-                                    <div class="post_header resume_post_header">
-                                                                                       
-                                        <div class="resume_period">
-											                                            <span class="period_from">2016 - </span>
-                                            											
-                                            <span class="period_to">2016</span>
-                                        </div>
-                                                                                <h4 class="post_title"><span class="post_title_icon" style="background-color: #3498db"></span>Certificat de réussite                                            </h4>
-                                        <h5 class="post_subtitle"></h5>
-                                    </div>
-                                    <div class="post_body resume_post_body">
-                                        <p>Création d’application mobile multiplate-forme avec la technologie Xamarin<br />
-Build My 5 Stars App Microsoft &amp; Intilaq &amp; Qatar Freindship Fondation</p>
-                                    </div>
-                                </article>
-                                                                <article class="post resume_post resume_post_2 odd">
-                                    <div class="post_header resume_post_header">
-                                                                                       
-                                        <div class="resume_period">
-											                                            <span class="period_from">2016 - </span>
-                                            											
-                                            <span class="period_to">2016</span>
-                                        </div>
-                                                                                <h4 class="post_title"><span class="post_title_icon" style="background-color: #3498db"></span>Certificat de réussite                                            </h4>
-                                        <h5 class="post_subtitle"></h5>
-                                    </div>
-                                    <div class="post_body resume_post_body">
-                                        <p>Gestion des projets : Compétences de vie Project<br />
-Management Institute : Jordan Chapter &amp; EDRAAK, Jordan</p>
-                                    </div>
-                                </article>
-                                                                <article class="post resume_post resume_post_3 even">
-                                    <div class="post_header resume_post_header">
-                                                                                       
-                                        <div class="resume_period">
-											                                            <span class="period_from">2015 - </span>
-                                            											
-                                            <span class="period_to">2015</span>
-                                        </div>
-                                                                                <h4 class="post_title"><span class="post_title_icon" style="background-color: #3498db"></span>Formation des entrepreneurs                                            </h4>
-                                        <h5 class="post_subtitle"></h5>
-                                    </div>
-                                    <div class="post_body resume_post_body">
-                                        <p>Projet : Création de boite de développement Web<br />
-Agence de Promotion Industrielles, Manouba</p>
-                                    </div>
-                                </article>
-                                                                <article class="post resume_post resume_post_4 odd">
-                                    <div class="post_header resume_post_header">
-                                                                                       
-                                        <div class="resume_period">
-											                                            <span class="period_from">2014 - </span>
-                                            											
-                                            <span class="period_to">2014</span>
-                                        </div>
-                                                                                <h4 class="post_title"><span class="post_title_icon" style="background-color: #3498db"></span>CEFE : Création Entreprise, Formation...                                            </h4>
-                                        <h5 class="post_subtitle"></h5>
-                                    </div>
-                                    <div class="post_body resume_post_body">
-                                        <p>Agence National pour l’Emploi et le Travailleur Indépendant , Kef</p>
-                                    </div>
-                                </article>
-                                                                <article class="post resume_post resume_post_5 even">
-                                    <div class="post_header resume_post_header">
-                                                                                       
-                                        <div class="resume_period">
-											                                            <span class="period_from">2014 - </span>
-                                            											
-                                            <span class="period_to">2014</span>
-                                        </div>
-                                                                                <h4 class="post_title"><span class="post_title_icon" style="background-color: #3498db"></span>HP-Life E-Learning                                            </h4>
-                                        <h5 class="post_subtitle"></h5>
-                                    </div>
-                                    <div class="post_body resume_post_body">
-                                        <p>Formation électronique des entrepreneurs<br />
-Agance des Etats-Unis pour le développement International &amp; United Nations Industrial Development Organization, Sousse</p>
-                                    </div>
-                                </article>
-                                                                <article class="post resume_post resume_post_6 odd">
-                                    <div class="post_header resume_post_header">
-                                                                                       
-                                        <div class="resume_period">
-											                                            <span class="period_from">2011 - </span>
-                                            											
-                                            <span class="period_to">2013</span>
-                                        </div>
-                                                                                <h4 class="post_title"><span class="post_title_icon" style="background-color: #3498db"></span>Brevet de Technicien Supérieur  Développeur Web                                            </h4>
-                                        <h5 class="post_subtitle"></h5>
-                                    </div>
-                                    <div class="post_body resume_post_body">
-                                        <p>Institue Maghrébin de Science Economiques et Technique, Tunis<br />
-Mention : Bien</p>
-                                    </div>
-                                </article>
-                                                                <article class="post resume_post resume_post_7 even">
-                                    <div class="post_header resume_post_header">
-                                                                                       
-                                        <div class="resume_period">
-											                                            <span class="period_from">2009 - </span>
-                                            											
-                                            <span class="period_to">2011</span>
-                                        </div>
-                                                                                <h4 class="post_title"><span class="post_title_icon" style="background-color: #3498db"></span>Brevet de Technicien Supérieur  Web Master                                            </h4>
-                                        <h5 class="post_subtitle"></h5>
-                                    </div>
-                                    <div class="post_body resume_post_body">
-                                        <p>Khawarizmi Center, Tunis<br />
-Mention : Assez Bien</p>
-                                    </div>
-                                </article>
-                                                                <article class="post resume_post resume_post_8 odd">
-                                    <div class="post_header resume_post_header">
-                                                                                       
-                                        <div class="resume_period">
-											                                            <span class="period_from">2008 - </span>
-                                            											
-                                            <span class="period_to">2008</span>
-                                        </div>
-                                                                                <h4 class="post_title"><span class="post_title_icon" style="background-color: #3498db"></span>BAC Technique                                            </h4>
-                                        <h5 class="post_subtitle"></h5>
-                                    </div>
-                                    <div class="post_body resume_post_body">
-                                        <p>Lycée Ahmed Amara, Kef<br />
-Mention : Assez Bien</p>
-                                    </div>
-                                </article>
-                                                            </div> <!-- .category_body -->
-                        </div> <!-- .category -->
-                                                <div class="category resume_category resume_category_3 even">
-                            <div class="category_header resume_category_header">
-                                <h3 class="category_title" style="background: #373737"><span class="category_title_icon" style="background-color:#C72C1C"></span>PORTFOLIO</h3>
-                            </div>
-                            <div class="category_body resume_category_body">
-                                                            <article class="post resume_post resume_post_1 first even">
-                                    <div class="post_header resume_post_header">
-                                                                                       
-                                        <div class="resume_period">
-											                                            <span class="period_from">02.2016 - </span>
-                                            											
-                                            <span class="period_to">03.2017</span>
-                                        </div>
-                                                                                <h4 class="post_title"><span class="post_title_icon" style="background-color: #C72C1C"></span>Hebergili, Intégration                                            </h4>
-                                        <h5 class="post_subtitle">www.hebergili.com</h5>
-                                    </div>
-                                    <div class="post_body resume_post_body">
-                                        <ul>
-<li>Intégration de solution de facturation et gestion des services d’hébergement web basé sur WHMCS.</li>
-</ul>
-                                    </div>
-                                </article>
-                                                                <article class="post resume_post resume_post_2 odd">
-                                    <div class="post_header resume_post_header">
-                                                                                       
-                                        <div class="resume_period">
-											                                            <span class="period_from">06.2016 - </span>
-                                            											
-                                            <span class="period_to">08.2016</span>
-                                        </div>
-                                                                                <h4 class="post_title"><span class="post_title_icon" style="background-color: #C72C1C"></span>iLi-Studios, Conception, Intégration                                            </h4>
-                                        <h5 class="post_subtitle">cloud.ili-studios.tn</h5>
-                                    </div>
-                                    <div class="post_body resume_post_body">
-                                        <ul>
-<li>Conception et mise en place d’une plateforme de service de stockage et partage de fichiers et d’application diverses en ligne à base de OwnCloud.</li>
-</ul>
-                                    </div>
-                                </article>
-                                                                <article class="post resume_post resume_post_3 even">
-                                    <div class="post_header resume_post_header">
-                                                                                       
-                                        <div class="resume_period">
-											                                            <span class="period_from">06.2016 - </span>
-                                            											
-                                            <span class="period_to">08.2016</span>
-                                        </div>
-                                                                                <h4 class="post_title"><span class="post_title_icon" style="background-color: #C72C1C"></span>iLi-Studios, Conception, Intégration                                            </h4>
-                                        <h5 class="post_subtitle">mantis.ili-studios.tn</h5>
-                                    </div>
-                                    <div class="post_body resume_post_body">
-                                        <ul>
-<li> Conception et mise en place d’un système de suivi d’anomalies logiciels (bugs) et gestion des projets avec la méthodologie SCRUM a base de Manti Bugs Tracker.</li>
-</ul>
-                                    </div>
-                                </article>
-                                                                <article class="post resume_post resume_post_4 odd">
-                                    <div class="post_header resume_post_header">
-                                                                                       
-                                        <div class="resume_period">
-											                                            <span class="period_from">02.2016 - </span>
-                                            											
-                                            <span class="period_to">06.2016</span>
-                                        </div>
-                                                                                <h4 class="post_title"><span class="post_title_icon" style="background-color: #C72C1C"></span>iLi-Studios, Chef de projet, Encadrant...                                            </h4>
-                                        <h5 class="post_subtitle">www.rechargili.tn</h5>
-                                    </div>
-                                    <div class="post_body resume_post_body">
-                                        <ul>
-<li>Encadrement, Conception et Réalisation d’un projet PFE dans la faculté des sciences de Tunis (FST) qui a été lauréat du concours national d’innovation de l’agence de promotion industrielles, et lauréat dans le concours « Build my 5 stars App » de Intilaq &amp; Microsoft. Il s’agit d’une application mobile qui effectue la recharge du solde téléphonique à voie optique, et qui permet de consulter l’intégrité des codes USSD des opérateurs téléphoniques tunisiens.</li>
-</ul>
-                                    </div>
-                                </article>
-                                                                <article class="post resume_post resume_post_5 even">
-                                    <div class="post_header resume_post_header">
-                                                                                       
-                                        <div class="resume_period">
-											                                            <span class="period_from">2015 - </span>
-                                            											
-                                            <span class="period_to">2015</span>
-                                        </div>
-                                                                                <h4 class="post_title"><span class="post_title_icon" style="background-color: #C72C1C"></span>iLi-Studios, Développement                                            </h4>
-                                        <h5 class="post_subtitle">www.ili-studios.tn</h5>
-                                    </div>
-                                    <div class="post_body resume_post_body">
-                                        <p>Développement d’un site web vitrine, qui représente l’entreprise et ces services à base de système de gestion de contenue WordPress</p>
-                                    </div>
-                                </article>
-                                                                <article class="post resume_post resume_post_6 odd">
-                                    <div class="post_header resume_post_header">
-                                                                                       
-                                        <div class="resume_period">
-											                                            <span class="period_from">05.2015 - </span>
-                                            											
-                                            <span class="period_to">03.2017</span>
-                                        </div>
-                                                                                <h4 class="post_title"><span class="post_title_icon" style="background-color: #C72C1C"></span>Hebergili, Développement, Conception                                            </h4>
-                                        <h5 class="post_subtitle">www.hebergili.com</h5>
-                                    </div>
-                                    <div class="post_body resume_post_body">
-                                        <ul>
-<li>Conception Dimensionnement et mise en place d’une plateforme cloud a haute disponibilité (Lamp, Bind, Dovecot, Postfix, Procmail, ProFTPD, SpamAssassin, SSH, Weblizer, Git Repositories, Linuw Firewall, Fail2ban) sur un cluster de 4 serveurs Dell XeonR E5 de 8 HDD</li>
-<li>Analyse, conception, développement et automatisation d’enregistrement des noms de domaines (API, ResselerClub API, Freenom API)</li>
-<li>Mise en place du cluster DNS Bind</li>
-<li>Conception et mise en place de la platforme d’hébergement mutilisé (CloudLinux Virtualmin)</li>
-<li>Monitoring des services et des serveurs à travers Logwatch &amp; Naemon</li>
-<li>Automatisation de la gestion de sauvegarde avec bacula</li>
-</ul>
-                                    </div>
-                                </article>
-                                                                <article class="post resume_post resume_post_7 even">
-                                    <div class="post_header resume_post_header">
-                                                                                       
-                                        <div class="resume_period">
-											                                            <span class="period_from">2015 - </span>
-                                            											
-                                            <span class="period_to">2015</span>
-                                        </div>
-                                                                                <h4 class="post_title"><span class="post_title_icon" style="background-color: #C72C1C"></span>Hebergili, Développement                                            </h4>
-                                        <h5 class="post_subtitle">www.hebergili.com</h5>
-                                    </div>
-                                    <div class="post_body resume_post_body">
-                                        <p>Développement d’un site web de commande en ligne des services d’hébergement web à base de système de gestion de contenue WordPress.</p>
-                                    </div>
-                                </article>
-                                                                <article class="post resume_post resume_post_8 odd">
-                                    <div class="post_header resume_post_header">
-                                                                                       
-                                        <div class="resume_period">
-											                                            <span class="period_from">2015 - </span>
-                                            											
-                                            <span class="period_to">2017</span>
-                                        </div>
-                                                                                <h4 class="post_title"><span class="post_title_icon" style="background-color: #C72C1C"></span>Les différents sites web réalisés au client de...                                            </h4>
-                                        <h5 class="post_subtitle"></h5>
-                                    </div>
-                                    <div class="post_body resume_post_body">
-                                        <p>La plupart de ces sites sont basés sur des systèmes de gestion de contenu comme WordPress, ou PrestaShop</p>
-<ul>
-<li>www.afroclimate.org</li>
-<li>www.atupee.org</li>
-<li>www.adego-group.com</li>
-<li>www.cp-mss.com</li>
-<li>www.csi-immobiliere.com</li>
-<li>www.dreambigsailing.com</li>
-<li>www.legendsreborn.tn</li>
-<li>www.tgtv.tn</li>
-<li>www.originalengineering.com</li>
-<li>www.snase-sarl.com</li>
-<li>www.tunpro.tn</li>
-<li>www.vagaimmobiliere.com</li>
-</ul>
-                                    </div>
-                                </article>
-                                                            </div> <!-- .category_body -->
-                        </div> <!-- .category -->
-                                                <div class="category resume_category resume_category_4 odd">
-                            <div class="category_header resume_category_header">
-                                <h3 class="category_title" style="background: #373737"><span class="category_title_icon" style="background-color:#f1c40f"></span>STAGES : PROJETS DE FIN D’ETUDE</h3>
-                            </div>
-                            <div class="category_body resume_category_body">
-                                                            <article class="post resume_post resume_post_1 first even">
-                                    <div class="post_header resume_post_header">
-                                                                                       
-                                        <div class="resume_period">
-											                                            <span class="period_from">02.2011 - </span>
-                                            											
-                                            <span class="period_to">06.2011</span>
-                                        </div>
-                                                                                <h4 class="post_title"><span class="post_title_icon" style="background-color: #f1c40f"></span>Développeur Web                                            </h4>
-                                        <h5 class="post_subtitle">Rades, Tunis</h5>
-                                    </div>
-                                    <div class="post_body resume_post_body">
-                                        <p>Solutions Interactives Visuelle<br />
-Création d’un système de facturation pour la location des  Serveurs de jeux et l’intégration d’une solution SOAP-API</p>
-                                    </div>
-                                </article>
-                                                                <article class="post resume_post resume_post_2 odd">
-                                    <div class="post_header resume_post_header">
-                                                                                       
-                                        <div class="resume_period">
-											                                            <span class="period_from">07.2009 - </span>
-                                            											
-                                            <span class="period_to">12.2009</span>
-                                        </div>
-                                                                                <h4 class="post_title"><span class="post_title_icon" style="background-color: #f1c40f"></span>Développeur Web                                            </h4>
-                                        <h5 class="post_subtitle">Rades, Tunis</h5>
-                                    </div>
-                                    <div class="post_body resume_post_body">
-                                        <p>OkToBoot<br />
-Création de système de vente en ligne d’une boutique de  Vente de produit d’informatique sur Magento à base de  ZendFrimework sur un VPS linux</p>
-                                    </div>
-                                </article>
-                                                                <article class="post resume_post resume_post_3 even">
-                                    <div class="post_header resume_post_header">
-                                                                                       
-                                        <div class="resume_period">
-											                                            <span class="period_from">02.2008 - </span>
-                                            											
-                                            <span class="period_to">06.2008</span>
-                                        </div>
-                                                                                <h4 class="post_title"><span class="post_title_icon" style="background-color: #f1c40f"></span>Web Master                                            </h4>
-                                        <h5 class="post_subtitle">Lafayette, Tunis</h5>
-                                    </div>
-                                    <div class="post_body resume_post_body">
-                                        <p>WorkGroup<br />
-Création d’une solution e-commerce pour une bijouterie en ligne, avec un système de facturation</p>
-                                    </div>
-                                </article>
-                                                            </div> <!-- .category_body -->
-                        </div> <!-- .category -->
-                                            </div> <!-- .wrapper -->
-                </div> <!-- .section_body -->
+                     <div class="wrapper resume_wrapper">
+					<script>
+function fnct1(n) {
+    jQuery(".tr").click(function() {
+	   c=jQuery(this).text();
+	  id1=jQuery(this).attr("id");
+	jQuery(this).replaceWith('<input type="text"  id="12"value='+c+' class="tst" />');
+    });	
+	jQuery("#12").blur(function() {
+		k=jQuery(this).val();		
+	jQuery(this).replaceWith('<span class="tr" id='+id1+' >' + k + '</span>');	
+		jQuery.post(
+            "test.php", 
+            {
+                nom : jQuery(this).val(),
+				key:id1,
+				name:n,
+            },
+           function(data){
+                jQuery(".tst").html(data);
+           });
+		   		   window.location.reload();
+
+	       });
+	}
+	function fnct2(n) {
+    jQuery(".tr").click(function()   {
+	   c=jQuery(this).text();
+	  id1=jQuery(this).attr("id");
+	  tab=jQuery(this).attr("data");
+	jQuery(this).replaceWith('<input type="text"  id="12" value='+c+' class="tst" />');
+    });	
+
+	jQuery("#12").blur(function() {
+		k=jQuery(this).val();
+		jQuery(this).replaceWith('<span class="tr" id='+id1+'>' + k + '</span>');	
+		jQuery.post(
+            "test.php", 
+            {
+                nom1 : jQuery(this).val(),
+				key:id1,
+				key1:tab,
+				name:n,
+            },
+           function(data){
+                jQuery(".tst").html(data);
+           });
+		  
+	
+		
+	  });
+
+	
+	}
+	function fnct3(n) {
+    jQuery(".tr").click(function()   {
+	   c=jQuery(this).text();
+	  id1=jQuery(this).attr("id");
+	  tab=jQuery(this).attr("data");
+	  console.log(tab);
+	  tab2=jQuery(this).attr("data2");
+	  console.log(tab2);
+	 	   
+
+	 
+	jQuery(this).replaceWith('<input type="text"  id="12"value='+c+' class="tst" />');
+    });	
+	jQuery("#12").blur(function() {
+		k=jQuery(this).val();
+		jQuery(this).replaceWith('<span class="tr" id='+id1+'>' + k + '</span>');	
+		 
+		jQuery.post(
+            "test.php", 
+            {
+                nom2 : jQuery(this).val(),
+				key:id1,
+				key1:tab,
+				key2:tab2,
+				name:n,
+            },
+           function(data){
+                jQuery(".tst").html(data);
+           });
+		   
+
+	});
+	}
+	/*function fnct(n) {
+    jQuery(".tr").click(function()   {
+	   c=jQuery(this).text();
+	  id1=jQuery(this).attr("id");
+	  tab=jQuery(this).attr("data");
+	  console.log(tab);
+	  tab2=jQuery(this).attr("data2");
+	  console.log(tab2);
+	jQuery(this).replaceWith('<input type="text"  id="12" value='+c+' class="tst" />');
+    });	
+	jQuery("#12").blur(function() {
+		k=jQuery(this).val();
+		jQuery(this).replaceWith('<span class="tr" id='+id1+'>' + k + '</span>');	
+		 
+		jQuery.post(
+            "test.php", 
+            {
+                nom2 : jQuery(this).val(),
+				key:id1,
+				key1:tab,
+				key2:tab2,
+				name:n,
+            },
+           function(data){
+                jQuery(".tst").html(data);
+           });
+		   
+
+	});
+	}
+*/
+function fnctli (e,a,b)
+{ ch=".p_"+a+"_"+b;
+
+
+	jQuery(ch).append("<div class='post_body resume_post_body' onclick='fnct3(n3,l+1)' ><li class='tr'id="+e+" data="+b+" data2="+a+" >tapez un autre ligne </li></div>");
+	
+}
+
+function fnctmoinli (i,j)
+{id1=jQuery(".m").attr("id");
+console.log(id1);
+ch="moins";
+jQuery.post(
+            "test.php", 
+            {
+               // nom2 : jQuery(this).val(),
+				moin:ch,
+				key:id1,
+				key1:i,
+				key2:j,
+				
+            },
+           function(data){
+                jQuery(".tst").html(data);
+           });	
+}
+
+
+function fnctmoinbloc1 (key)
+{id1=jQuery(".m1").attr("id");
+console.log(id1);
+ch="moins";
+jQuery.post(
+            "test.php", 
+            {
+               // nom2 : jQuery(this).val(),
+				moin1:ch,
+				key:id1,
+				key1:key,
+			
+				
+            },
+           function(data){
+                jQuery(".tst").html(data);
+           });	
+}
+
+function fnctmoinbloc2 (key)
+{
+id1=jQuery(".m2").attr("id");
+ch="moins";
+jQuery.post(
+            "test.php", 
+            {
+              moin3:ch,
+				
+				key:id1,
+			
+			
+				
+            },
+           function(data){
+                jQuery(".tst").html(data);
+           });	
+}
+
+
+
+function fnctbloc2 (a,b,c,d,e)
+{ch2= ".d_"+a+"_"+b;
+ch=".e_"+d ;
+
+
+a=a+2;
+jQuery(ch2).append("<div class='post_header resume_post_header' onclick=fnct2(n2)><div class='resume_period'><input type='button' value='+' id='B1' onclick='fnctbloc2("+b+")' style='background-color: #666666; float:right'><span class='tr'>la date de : </span><span class='tr'>- la date jusqu'a :</span><input type='button' value='-' style='background-color: #808080; float:right'></div><h4 class='post_title'><span class='post_title_icon' style='background-color: #3eb337'></span><span id="+a+" data="+c+" class='tr'>nom du societe</h4><h5 class='post_subtitle'></h5></div>");
+ jQuery(ch2).append("<div class='post_body resume_post_body' onclick='fnct2(n4)'><span class='tr' id="+a+" data="+c+">tapez le role </div><p>Ma mission était de :</p>");
+
+jQuery(ch2).append("<div class='post_body resume_post_body' onclick='fnct3(n3)' ><li class='tr'id="+0+" data="+c+" data2="+a+" onclick='fnct3(n3)'   >tapez un ligne </li></div>");
+	
+}
+
+
+
+
+function fnctbloc1 (lo)
+{//ch2= ".d_"+a+"_"+b;
+//ch=".e_"+d ;
+
+ jQuery("#ici").append("<div class='category_header resume_category_header' onclick='fnct1(n1)' ><h3 class='category_title' style='background: #373737'><span class='category_title_icon' style='background-color:#3eb337'></span><span class='tr' id="+lo+">tapez le nom de cet article <input type='button' value='+'id='B1' onclick='fnctbloc1()' style='background-color: #666666; float:right'><input type='button' value='-' style='background-color: #808080; float:right'></span></h3></div>");
+
+jQuery("#ici").append("<div class='post_header resume_post_header' onclick='fnct2(n2)'><div class='resume_period'><input type='button' value='+' id='B1' onclick='fnctbloc2()' style='background-color: #666666; float:right'><span class='tr'>la date de : </span><span class='tr'>- la date jusqu'a :</span><input type='button' value='-' style='background-color: #808080; float:right'></div><h4 class='post_title'><span class='post_title_icon' style='background-color: #3eb337'></span><span id="+0+" data="+lo+" class='tr' onclick='fnct2(n2)' >nom du societe</h4><h5 class='post_subtitle'></h5></div>");
+ jQuery("#ici").append("<div class='post_body resume_post_body' onclick='fnct2(n4)'><span class='tr' id="+0+" data="+lo+">tapez le role </div><p>Ma mission était de :</p>");
+
+jQuery("#ici").append("<div class='post_body resume_post_body' onclick='fnct3(n3)' ><li class='tr'id="+0+" data="+lo+" data2="+0+" onclick='fnct3(n3)'   >tapez un ligne </li></div>");
+	
+}
+
+
+
+
+	
+	jQuery(document).ready(function(){
+       
+          jQuery.getJSON("inforjson.json", function(result){
+			i=-1;
+			
+	             jQuery.each(result, function(key, value) {
+					 lo=jQuery(result).size();
+					 console.log(lo);
+					 var className3 = ".e_"+key ;
+								 if(t!=0)
+								jQuery(className3).append("</div>");
+							  jQuery("#ici").append("<div  class='e_"+key+"'>");
+
+						   n1="name1";
+						   var c = key;
+	                       jQuery(className3).append("<div class='category_header resume_category_header' onclick='fnct1(n1)' ><h3 class='category_title' style='background: #373737'><span class='category_title_icon' style='background-color:#3eb337'></span><span class='tr' id="+key+">"+ value.name1+"<input type='button' value='+'id='B1' onclick='fnctbloc1(lo)' style='background-color: #666666; float:right'><div class='m2' id="+key+" ><input type='button' value='-' onclick='fnctmoinbloc2()'style='background-color: #808080; float:right'></div></span></h3></div>");
+	                       i=i+1;
+						   j=-1;
+						   var t=0;
+						   	
+   
+	             jQuery.each(value.valeure, function(key2, value2) {
+					 var className2 = ".d_"+key2+"_"+c;
+								 if(t!=0)
+								jQuery(className2).append("</div>");
+
+											n2="name";
+											 n4="role";
+											 n6="date1";
+											j=j+1;	
+
+											 var className = ".p_"+key2+"_"+c;
+											 
+											 if(t!=0)
+										jQuery(className).append("</ul>");
+									     jQuery(className3).append("<div  class='d_"+key2+"_"+c+"'>");
+
+                                           jQuery(className2).append("<div class='post_header resume_post_header' ><div class='resume_period'><span class='tr' onclick=fnct2(n6)>"+value2.date1+"</span><span class='tr'>-"+value2.date2+"</span></div><h4 class='post_title'><span class='post_title_icon' style='background-color: #3eb337'></span><div onclick='fnct2(n2)'><span id="+key2+" data="+i+" class='tr'>"+ value2.name+"</span></div></h4><h5 class='post_subtitle'></h5></div>");
+											 jQuery(className2).append("<div class='post_body resume_post_body' onclick='fnct2(n4)'><span class='tr' id="+key2+" data="+i+">"+ value2.role+"</div><p>Ma mission était de :</p>");
+
+											jQuery(className2).append("<ul  class='p_"+key2+"_"+c+"'>");
+                                            taille=jQuery(value2.article).size();
+											
+	   	            jQuery.each(value2.article, function(key3, value3) {
+						t++;
+						                                            console.log( taille=jQuery(value2.article).size());
+
+						                     n3="article";
+                                                                                       jQuery(className).append("<div class='post_body resume_post_body' onclick='fnct3(n3,l)'><li class='tr' id="+key3+" data="+i+" data2="+j+">"+ value3+"</div>");
+
+										   // jQuery(className).append("<div class='l' onclick='fnct3(n3)' ><li  onclick='fnct3(n3)' class= 'l' id="+key3+" data="+i+" data2="+j+">"+ value3+" </div>");
+                                            jQuery(className).append("<div class='m' id="+key3+"><input type='button' value='-' style='background-color: #808080;  float:right'  onclick='fnctmoinli("+i+","+j+")'></div>");
+
+														l=key3;
+                                                       //  console.log(l);
+														 
+			            	 });
+							 
+							
+							              jQuery(className).before("<div ><input type='button' value='+' id='B1'   onclick='fnctli("+taille+","+key2+","+c+")' style='background-color: #666666; float:right'></div>");
+									   		jQuery(className2).before("<input type='button' value='+' id='B2' onclick='fnctbloc2("+key2+","+c+","+i+","+key+","+key2+")' style='background-color: #666666; float:right'><div class='m1' id="+key2+" ><input type='button' value='-'  onclick='fnctmoinbloc1("+key+")' style='background-color: #808080; float:right'></div>");
+
+			                                                           	 //jQuery("#ici").append("<br>");
+		                               });
+
+	});
+	});
+   
+	
+   
+   	
+	})											 </script>	
+					
+			<a class="tr">
+	<input type='button' value='+' id='B1' style='background-color: #666666; float:right'></a>		                          
+ <div id="ici" ></div>
+	
+	</script><!-- *******************************************************************************************************************************************************************************  -->	
+
+
+<!-- .section_body  //****************************************************************************************************************************************************** -->
             </section> <!-- #resume -->
 
 			<section id="contact" class="section contact_section even">

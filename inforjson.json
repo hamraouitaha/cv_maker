@@ -1,0 +1,45 @@
+[
+  {
+    "name1": "mind engeneering",
+    "valeure": [
+      {
+        "name": "nom",
+        "role": "administrateur",
+        "date1": 1.2013,
+        "date2": 2.2017,
+        "article": [
+          "html55",
+          "web5555",
+          "web6"
+        ]
+      },
+      {
+        "name": "nouveau",
+        "role": "web designer",
+        "date1": 1.2013,
+        "date2": 2.2017,
+        "article": [
+          "html",
+          "web designer",
+          "technotip3"
+        ]
+      }
+    ]
+  },
+  {
+    "name1": "les formations",
+    "valeure": [
+      {
+        "name": "formation ",
+        "role": "admi",
+        "date1": 1.2013,
+        "date2": 2.2017,
+        "article": [
+          "jqfsdhlkfj",
+          "design",
+          "photoshop"
+        ]
+      }
+    ]
+  }
+]
